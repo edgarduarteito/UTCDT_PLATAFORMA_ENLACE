@@ -18,10 +18,7 @@ class AulaMusicalAdmin extends Admin
         $datagridMapper
             ->add('titulo')
             ->add('descripcion')
-            ->add('componente')
-            ->add('capacitaciones')
-            ->add('detalle')
-            ->add('lugar')
+            
             
         ;
     }
