@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <entity repository-class="ItoSoftware\Base\ModelBundle\Entity\ComentarioEventoRepository" name="ItoSoftware\Base\ModelBundle\Entity\ComentarioEvento" table="comentario_evento">
+        <id name="id" type="integer" column="id">
+            <generator strategy="IDENTITY"/> 
+        </id>
+         <many-to-one field="User" target-entity="ItoSoftware\Base\ModelBundle\Entity\User" inversed-by="comentarios_evento">
+            <join-column name="user_id" referenced-column-name="id" nullable='0' />
+        </many-to-one>
+        <many-to-one field="evento" target-entity="ItoSoftware\Base\ModelBundle\Entity\Evento" inversed-by="comentarios_evento">
+            <join-columns>
+            <join-column name="evento_id" referenced-column-name="id" nullable='0' />
+            </join-columns>
+        </many-to-one>
+        <field name="texto" type="text" column="texto"/>
+        <field name="calificacion" type="integer" column="calificacion"/>
+        <!-- FECHAS -->
+        <field name="created_at" type="datetime" column="created_at"/>
+        <field name="updated_at" type="datetime" column="updated_at" nullable="1"/>
+        <lifecycle-callbacks>
+            <lifecycle-callback type="prePersist" method="setCreatedAtValue" />
+            <lifecycle-callback type="preUpdate" method="setUpdatedAtValue" />
+        </lifecycle-callbacks>
+        <!-- FINAL FECHAS -->
+    </entity>
+</doctrine-mapping>

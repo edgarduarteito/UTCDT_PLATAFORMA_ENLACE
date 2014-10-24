@@ -1,0 +1,558 @@
+<?php
+
+namespace ItoSoftware\Base\ModelBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use SamJ\DoctrineSluggableBundle\SluggableInterface;
+
+/**
+ * Hotel
+ */
+class Hotel implements SluggableInterface
+{
+    
+//    ******************************************************************************************
+//    ****ADICIONES
+//    ******************************************************************************************
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function setCreatedAtValue() {
+        $this->activo = true;
+        $this->created_at = new \DateTime();
+        $this->updated_at = new \DateTime();
+    }
+
+    /**
+     * @ORM\PreUpdate
+     */
+    public function setUpdatedAtValue() {
+        $this->updated_at = new \DateTime();
+    }
+    
+    public function __toString() {
+        return $this->getNombre();
+    }
+
+    public function setSlug($slug) {
+        if (!empty($this->slug))
+            return false;
+        $this->slug = $slug;
+    }
+
+    public function getSlugFields() {
+        return $this->getNombre();
+    }
+//    ******************************************************************************************
+//    ****MODIFICACIONES
+//    ******************************************************************************************    
+
+    /**
+     * @var string
+     */
+    private $nombre;
+
+    /**
+     * @var string
+     */
+    private $direccion;
+
+    /**
+     * @var string
+     */
+    private $telefono;
+
+    /**
+     * @var string
+     */
+    private $celular;
+
+    /**
+     * @var string
+     */
+    private $web;
+
+    /**
+     * @var string
+     */
+    private $fax;
+
+    /**
+     * @var float
+     */
+    private $longitud;
+
+    /**
+     * @var float
+     */
+    private $latitud;
+
+    /**
+     * @var string
+     */
+    private $descripcion;
+
+    /**
+     * @var integer
+     */
+    private $estrellas;
+
+    /**
+     * @var string
+     */
+    private $servicios;
+
+    /**
+     * @var integer
+     */
+    private $id;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $comentarios_hotel;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $hotel_fotos;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->comentarios_hotel = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->hotel_fotos = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Set nombre
+     *
+     * @param string $nombre
+     * @return Hotel
+     */
+    public function setNombre($nombre)
+    {
+        $this->nombre = $nombre;
+
+        return $this;
+    }
+
+    /**
+     * Get nombre
+     *
+     * @return string 
+     */
+    public function getNombre()
+    {
+        return $this->nombre;
+    }
+
+    /**
+     * Set direccion
+     *
+     * @param string $direccion
+     * @return Hotel
+     */
+    public function setDireccion($direccion)
+    {
+        $this->direccion = $direccion;
+
+        return $this;
+    }
+
+    /**
+     * Get direccion
+     *
+     * @return string 
+     */
+    public function getDireccion()
+    {
+        return $this->direccion;
+    }
+
+    /**
+     * Set telefono
+     *
+     * @param string $telefono
+     * @return Hotel
+     */
+    public function setTelefono($telefono)
+    {
+        $this->telefono = $telefono;
+
+        return $this;
+    }
+
+    /**
+     * Get telefono
+     *
+     * @return string 
+     */
+    public function getTelefono()
+    {
+        return $this->telefono;
+    }
+
+    /**
+     * Set celular
+     *
+     * @param string $celular
+     * @return Hotel
+     */
+    public function setCelular($celular)
+    {
+        $this->celular = $celular;
+
+        return $this;
+    }
+
+    /**
+     * Get celular
+     *
+     * @return string 
+     */
+    public function getCelular()
+    {
+        return $this->celular;
+    }
+
+    /**
+     * Set web
+     *
+     * @param string $web
+     * @return Hotel
+     */
+    public function setWeb($web)
+    {
+        $this->web = $web;
+
+        return $this;
+    }
+
+    /**
+     * Get web
+     *
+     * @return string 
+     */
+    public function getWeb()
+    {
+        return $this->web;
+    }
+
+    /**
+     * Set fax
+     *
+     * @param string $fax
+     * @return Hotel
+     */
+    public function setFax($fax)
+    {
+        $this->fax = $fax;
+
+        return $this;
+    }
+
+    /**
+     * Get fax
+     *
+     * @return string 
+     */
+    public function getFax()
+    {
+        return $this->fax;
+    }
+
+    /**
+     * Set longitud
+     *
+     * @param float $longitud
+     * @return Hotel
+     */
+    public function setLongitud($longitud)
+    {
+        $this->longitud = $longitud;
+
+        return $this;
+    }
+
+    /**
+     * Get longitud
+     *
+     * @return float 
+     */
+    public function getLongitud()
+    {
+        return $this->longitud;
+    }
+
+    /**
+     * Set latitud
+     *
+     * @param float $latitud
+     * @return Hotel
+     */
+    public function setLatitud($latitud)
+    {
+        $this->latitud = $latitud;
+
+        return $this;
+    }
+
+    /**
+     * Get latitud
+     *
+     * @return float 
+     */
+    public function getLatitud()
+    {
+        return $this->latitud;
+    }
+
+    /**
+     * Set descripcion
+     *
+     * @param string $descripcion
+     * @return Hotel
+     */
+    public function setDescripcion($descripcion)
+    {
+        $this->descripcion = $descripcion;
+
+        return $this;
+    }
+
+    /**
+     * Get descripcion
+     *
+     * @return string 
+     */
+    public function getDescripcion()
+    {
+        return $this->descripcion;
+    }
+
+    /**
+     * Set estrellas
+     *
+     * @param integer $estrellas
+     * @return Hotel
+     */
+    public function setEstrellas($estrellas)
+    {
+        $this->estrellas = $estrellas;
+
+        return $this;
+    }
+
+    /**
+     * Get estrellas
+     *
+     * @return integer 
+     */
+    public function getEstrellas()
+    {
+        return $this->estrellas;
+    }
+
+    /**
+     * Set servicios
+     *
+     * @param string $servicios
+     * @return Hotel
+     */
+    public function setServicios($servicios)
+    {
+        $this->servicios = $servicios;
+
+        return $this;
+    }
+
+    /**
+     * Get servicios
+     *
+     * @return string 
+     */
+    public function getServicios()
+    {
+        return $this->servicios;
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Add comentarios_hotel
+     *
+     * @param \ItoSoftware\Base\ModelBundle\Entity\ComentarioHotel $comentariosHotel
+     * @return Hotel
+     */
+    public function addComentariosHotel(\ItoSoftware\Base\ModelBundle\Entity\ComentarioHotel $comentariosHotel)
+    {
+        $this->comentarios_hotel[] = $comentariosHotel;
+
+        return $this;
+    }
+
+    /**
+     * Remove comentarios_hotel
+     *
+     * @param \ItoSoftware\Base\ModelBundle\Entity\ComentarioHotel $comentariosHotel
+     */
+    public function removeComentariosHotel(\ItoSoftware\Base\ModelBundle\Entity\ComentarioHotel $comentariosHotel)
+    {
+        $this->comentarios_hotel->removeElement($comentariosHotel);
+    }
+
+    /**
+     * Get comentarios_hotel
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getComentariosHotel()
+    {
+        return $this->comentarios_hotel;
+    }
+
+
+    /**
+     * Add hotel_fotos
+     *
+     * @param \ItoSoftware\Base\ModelBundle\Entity\HotelFoto $hotelFotos
+     * @return Hotel
+     */
+    public function addHotelFoto(\ItoSoftware\Base\ModelBundle\Entity\HotelFoto $hotelFotos)
+    {
+        $this->hotel_fotos[] = $hotelFotos;
+
+        return $this;
+    }
+
+    /**
+     * Remove hotel_fotos
+     *
+     * @param \ItoSoftware\Base\ModelBundle\Entity\HotelFoto $hotelFotos
+     */
+    public function removeHotelFoto(\ItoSoftware\Base\ModelBundle\Entity\HotelFoto $hotelFotos)
+    {
+        $this->hotel_fotos->removeElement($hotelFotos);
+    }
+
+    /**
+     * Get hotel_fotos
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getHotelFotos()
+    {
+        return $this->hotel_fotos;
+    }
+    /**
+     * @var \DateTime
+     */
+    private $created_at;
+
+    /**
+     * @var \DateTime
+     */
+    private $updated_at;
+
+
+    /**
+     * Set created_at
+     *
+     * @param \DateTime $createdAt
+     * @return Hotel
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->created_at = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get created_at
+     *
+     * @return \DateTime 
+     */
+    public function getCreatedAt()
+    {
+        return $this->created_at;
+    }
+
+    /**
+     * Set updated_at
+     *
+     * @param \DateTime $updatedAt
+     * @return Hotel
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updated_at = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get updated_at
+     *
+     * @return \DateTime 
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updated_at;
+    }
+    /**
+     * @var string
+     */
+    private $slug;
+
+
+    /**
+     * Get slug
+     *
+     * @return string 
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+    /**
+     * @var \ItoSoftware\Base\ModelBundle\Entity\Municipio
+     */
+    private $municipio;
+
+
+    /**
+     * Set municipio
+     *
+     * @param \ItoSoftware\Base\ModelBundle\Entity\Municipio $municipio
+     * @return Hotel
+     */
+    public function setMunicipio(\ItoSoftware\Base\ModelBundle\Entity\Municipio $municipio = null)
+    {
+        $this->municipio = $municipio;
+
+        return $this;
+    }
+
+    /**
+     * Get municipio
+     *
+     * @return \ItoSoftware\Base\ModelBundle\Entity\Municipio 
+     */
+    public function getMunicipio()
+    {
+        return $this->municipio;
+    }
+}

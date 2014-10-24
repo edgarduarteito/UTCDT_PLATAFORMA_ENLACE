@@ -1,0 +1,45 @@
+<div >
+
+    <div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="panel panel-info">
+
+                    <div class="panel-heading">
+                        <h2 class="panel-title">Cambiar Contraseña</h2>
+                    </div>
+                    <div class="col-md-12 iniciar-sesion">  
+                        <form action="{{ path('fos_user_resetting_reset', {'token': token}) }}" {{ form_enctype(form) }} method="POST" class="fos_user_resetting_reset">
+                           
+                            {% for passwordField in form.new %}
+                                {% if loop.first == true %}
+                                    <label for="username"  class="col-sm-4 control-label">Nueva Contraseña</label>
+                                    
+                            {%if form_errors(passwordField)  is not empty %}
+                                <div class="bg-danger errores">{{ form_errors(passwordField) }}</div>
+                            {% endif %}
+                                    {{form_widget(passwordField, { 'attr': {'class': 'form-control', 'id' : 'inputEmail' , 'placeholder':'Contraseña'}})}}
+
+                                {% else %}
+                                    <label for="username" class="col-sm-4 control-label">Repite tu contraseña</label>   
+                                    
+                            {%if form_errors(passwordField)  is not empty %}
+                                <div class="bg-danger errores">{{ form_errors(passwordField) }}</div>
+                            {% endif %}
+                                    {{form_widget(passwordField, { 'attr': {'class': 'form-control', 'id' : 'inputEmail' , 'placeholder':'Repite tu contraseña'}})}}
+
+                                {% endif %}
+                            {% endfor %}
+                            {{form_rest(form)}}
+                            <div>
+                                <input type="submit" value="{{ 'resetting.reset.submit'|trans({}, 'FOSUserBundle') }}" class="btn btn-success pull-right" />
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+                            

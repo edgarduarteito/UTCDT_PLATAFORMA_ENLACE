@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity repository-class="ItoSoftware\Base\ModelBundle\Entity\AulaMusicalRepository" name="ItoSoftware\Base\ModelBundle\Entity\AulaMusical" table="aula_musical">
+    <id name="id" type="integer" column="id">
+      <generator strategy="AUTO"/>
+    </id>
+    <field name="titulo" type="string" column="titulo" length="255"/>
+    <field name="descripcion" type="string" column="descripcion" length="255"/>
+    <field name="componente" type="text" column="componente"/>
+    <field name="capacitaciones" type="text" column="capacitaciones"/>
+    <field name="detalle" type="text" column="detalle"/>
+    <field name="lugar" type="string" column="lugar" length="255"/>
+    <field name="slug" type="string" column="slug" length="255"/>
+        <one-to-many field="comentarios_aula" target-entity="ItoSoftware\Base\ModelBundle\Entity\ComentarioAula" mapped-by="aula" />
+        <one-to-many field="aula_fotos" target-entity="ItoSoftware\Base\ModelBundle\Entity\AulaFoto" mapped-by="aula" />
+        <many-to-one field="municipio" target-entity="ItoSoftware\Base\ModelBundle\Entity\Municipio" inversed-by="aulas" nullable="0">
+            <join-column name="municipio_id" referenced-column-name="id" />
+        </many-to-one>
+    
+  </entity>
+</doctrine-mapping>

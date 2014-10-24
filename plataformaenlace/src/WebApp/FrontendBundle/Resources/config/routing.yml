@@ -1,0 +1,45 @@
+web_app_frontend_homepage:
+    pattern:  /
+    defaults: { _controller: WebAppFrontendBundle:Default:index }
+    
+web_app_frontend_detalle_hotel:
+    pattern:  /detalle/{slug}
+    defaults: { _controller: WebAppFrontendBundle:Default:detalle }
+    
+web_app_frontend_registro:
+    pattern:  /registro
+    defaults: { _controller: WebAppFrontendBundle:Default:registro }
+    
+web_app_frontend_sitemap:
+    pattern:  /mapa
+    defaults: { _controller: WebAppFrontendBundle:SiteMap:index }
+    
+web_app_frontend_calendar:
+    pattern:  /calendario
+    defaults: { _controller: WebAppFrontendBundle:Default:getJson}
+    
+web_app_frontend_contacto:
+    pattern:  /contacto
+    defaults: { _controller: WebAppFrontendBundle:Default:contacto }     
+       
+web_app_frontend_evento:
+    pattern:  /evento
+    defaults: { _controller: WebAppFrontendBundle:Evento:evento }  
+    
+web_app_frontend_aula:
+    pattern:  /aula
+    defaults: { _controller: WebAppFrontendBundle:AulaMusical:aula }
+    
+web_app_frontend_detalle_aula:
+    pattern:  /detalle/aula/{slug}
+    defaults: { _controller: WebAppFrontendBundle:AulaMusical:detalle } 
+    
+web_app_frontend_detalle_evento:
+    pattern:  /detalle/evento/{slug}
+    defaults: { _controller: WebAppFrontendBundle:Evento:detalleEvento }
+    
+web_app_frontend_slide:
+    pattern:  /slide
+    defaults: { _controller: WebAppFrontendBundle:Default:slide }    
+    
+           

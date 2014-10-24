@@ -1,0 +1,3 @@
+web_app_modelo_homepage:
+    pattern:  /hello/{name}
+    defaults: { _controller: WebAppModeloBundle:Default:index }

@@ -1,0 +1,192 @@
+<?php
+
+namespace ItoSoftware\Base\ModelBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * CalificacionHotel
+ */
+class CalificacionHotel
+{
+    
+    
+//    ******************************************************************************************
+//    ****ADICIONES
+//    ******************************************************************************************
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function setCreatedAtValue() {
+        $this->activo = true;
+        $this->created_at = new \DateTime();
+        $this->updated_at = new \DateTime();
+    }
+
+    /**
+     * @ORM\PreUpdate
+     */
+    public function setUpdatedAtValue() {
+        $this->updated_at = new \DateTime();
+    }
+
+//    ******************************************************************************************
+//    ****MODIFICACIONES
+//    ******************************************************************************************    
+    /**
+     * @var integer
+     */
+    private $calificacion;
+
+    /**
+     * @var \DateTime
+     */
+    private $created_at;
+
+    /**
+     * @var \DateTime
+     */
+    private $updated_at;
+
+    /**
+     * @var integer
+     */
+    private $id;
+
+    /**
+     * @var \ItoSoftware\Base\ModelBundle\Entity\User
+     */
+    private $User;
+
+    /**
+     * @var \ItoSoftware\Base\ModelBundle\Entity\Hotel
+     */
+    private $hotel;
+
+
+    /**
+     * Set calificacion
+     *
+     * @param integer $calificacion
+     * @return CalificacionHotel
+     */
+    public function setCalificacion($calificacion)
+    {
+        $this->calificacion = $calificacion;
+
+        return $this;
+    }
+
+    /**
+     * Get calificacion
+     *
+     * @return integer 
+     */
+    public function getCalificacion()
+    {
+        return $this->calificacion;
+    }
+
+    /**
+     * Set created_at
+     *
+     * @param \DateTime $createdAt
+     * @return CalificacionHotel
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->created_at = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get created_at
+     *
+     * @return \DateTime 
+     */
+    public function getCreatedAt()
+    {
+        return $this->created_at;
+    }
+
+    /**
+     * Set updated_at
+     *
+     * @param \DateTime $updatedAt
+     * @return CalificacionHotel
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updated_at = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get updated_at
+     *
+     * @return \DateTime 
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updated_at;
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set User
+     *
+     * @param \ItoSoftware\Base\ModelBundle\Entity\User $user
+     * @return CalificacionHotel
+     */
+    public function setUser(\ItoSoftware\Base\ModelBundle\Entity\User $user = null)
+    {
+        $this->User = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get User
+     *
+     * @return \ItoSoftware\Base\ModelBundle\Entity\User 
+     */
+    public function getUser()
+    {
+        return $this->User;
+    }
+
+    /**
+     * Set hotel
+     *
+     * @param \ItoSoftware\Base\ModelBundle\Entity\Hotel $hotel
+     * @return CalificacionHotel
+     */
+    public function setHotel(\ItoSoftware\Base\ModelBundle\Entity\Hotel $hotel = null)
+    {
+        $this->hotel = $hotel;
+
+        return $this;
+    }
+
+    /**
+     * Get hotel
+     *
+     * @return \ItoSoftware\Base\ModelBundle\Entity\Hotel 
+     */
+    public function getHotel()
+    {
+        return $this->hotel;
+    }
+}

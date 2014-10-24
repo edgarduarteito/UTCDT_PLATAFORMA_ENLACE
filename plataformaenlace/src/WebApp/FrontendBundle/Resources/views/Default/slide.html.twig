@@ -1,0 +1,14 @@
+{# empty Twig template #}
+<div class="slider">
+    <div class="slider_container"> 
+        {%for foto in slide%}
+            {% if foto.foto%}
+                <div class="rotador" data-background="http://{{app.request.host ~ foto.viewImage}}"></div>
+            {%else%}
+                <div class="rotador" data-background="http://{{app.request.host}}/bundles/webappfrontend/images/no-hay-foto.png"></div>  
+            {%endif%}
+        {%endfor%}
+        <button class="left">&lt;</button>
+        <button class="right">&gt;</button>
+    </div>
+</div>

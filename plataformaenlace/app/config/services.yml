@@ -1,0 +1,26 @@
+services:
+    twig.extension.intl:
+       class: Twig_Extensions_Extension_Intl
+       tags:
+           - { name: twig.extension }
+    stfalcon_tinymce:
+       tinymce_jquery: true
+       abstract: true 
+       selector: ".tinymce"
+       language: %locale%
+       theme:
+           simple:
+               theme: "modern"
+    
+            
+    itofrontend.twig.hoteles:
+        class: ItoSoftware\Base\ModelBundle\Twig\HotelesExtension
+        tags:
+            - { name: twig.extension }
+            
+    itofrontend.twig.visitas:
+        class: ItoSoftware\Base\ModelBundle\Twig\VisitasExtension
+        arguments:
+            doctrine: "@session"
+        tags:
+            - { name: twig.extension }

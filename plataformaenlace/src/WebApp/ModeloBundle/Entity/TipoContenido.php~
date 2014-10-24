@@ -1,0 +1,234 @@
+<?php
+
+namespace WebApp\ModeloBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
+
+/**
+ * TipoContenido
+ * @ORM\Entity 
+ * @ORM\Table(name="tipo_contenido")
+ * @ORM\Entity( repositoryClass="WebApp\ModeloBundle\Entity\TipoContenidoRepository")
+ * @ExclusionPolicy("ALL")
+ */
+class TipoContenido {
+
+    /**
+     * @var integer
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     * @Expose
+     */
+    protected $id;
+
+    /**
+     * @var string
+     * @ORM\Column(name="nombre", type="string", length=255)
+     * @Expose
+     */
+    private $nombre;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     * @ORM\OneToMany(targetEntity="Contenido", mappedBy="tipo_contenido" )
+     */
+    private $contenidos;
+    
+    /**
+     * @var boolean
+     * @ORM\Column(name="es_imagen", type="boolean", nullable=true)
+     * @Expose
+     */
+    private $es_imagen;
+    
+    /**
+     * @var boolean
+     * @ORM\Column(name="es_audio", type="boolean", nullable=true)
+     * @Expose
+     */
+    private $es_audio;
+    
+    /**
+     * @var boolean
+     * @ORM\Column(name="es_video", type="boolean", nullable=true)
+     * @Expose
+     */
+    private $es_video;
+    
+    /**
+     * @var boolean
+     * @ORM\Column(name="es_youtube", type="boolean", nullable=true)
+     * @Expose
+     */
+    private $es_youtube;
+    
+
+    public function __construct() {
+        $this->contenidos = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    public function __toString() {
+        return $this->getNombre();
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set nombre
+     *
+     * @param string $nombre
+     * @return TipoContenido
+     */
+    public function setNombre($nombre)
+    {
+        $this->nombre = $nombre;
+    
+        return $this;
+    }
+
+    /**
+     * Get nombre
+     *
+     * @return string 
+     */
+    public function getNombre()
+    {
+        return $this->nombre;
+    }
+
+    /**
+     * Set es_imagen
+     *
+     * @param boolean $esImagen
+     * @return TipoContenido
+     */
+    public function setEsImagen($esImagen)
+    {
+        $this->es_imagen = $esImagen;
+    
+        return $this;
+    }
+
+    /**
+     * Get es_imagen
+     *
+     * @return boolean 
+     */
+    public function getEsImagen()
+    {
+        return $this->es_imagen;
+    }
+
+    /**
+     * Set es_audio
+     *
+     * @param boolean $esAudio
+     * @return TipoContenido
+     */
+    public function setEsAudio($esAudio)
+    {
+        $this->es_audio = $esAudio;
+    
+        return $this;
+    }
+
+    /**
+     * Get es_audio
+     *
+     * @return boolean 
+     */
+    public function getEsAudio()
+    {
+        return $this->es_audio;
+    }
+
+    /**
+     * Set es_video
+     *
+     * @param boolean $esVideo
+     * @return TipoContenido
+     */
+    public function setEsVideo($esVideo)
+    {
+        $this->es_video = $esVideo;
+    
+        return $this;
+    }
+
+    /**
+     * Get es_video
+     *
+     * @return boolean 
+     */
+    public function getEsVideo()
+    {
+        return $this->es_video;
+    }
+
+    /**
+     * Add contenidos
+     *
+     * @param \WebApp\ModeloBundle\Entity\Contenido $contenidos
+     * @return TipoContenido
+     */
+    public function addContenido(\WebApp\ModeloBundle\Entity\Contenido $contenidos)
+    {
+        $this->contenidos[] = $contenidos;
+    
+        return $this;
+    }
+
+    /**
+     * Remove contenidos
+     *
+     * @param \WebApp\ModeloBundle\Entity\Contenido $contenidos
+     */
+    public function removeContenido(\WebApp\ModeloBundle\Entity\Contenido $contenidos)
+    {
+        $this->contenidos->removeElement($contenidos);
+    }
+
+    /**
+     * Get contenidos
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getContenidos()
+    {
+        return $this->contenidos;
+    }
+
+    /**
+     * Set es_youtube
+     *
+     * @param boolean $esYoutube
+     * @return TipoContenido
+     */
+    public function setEsYoutube($esYoutube)
+    {
+        $this->es_youtube = $esYoutube;
+    
+        return $this;
+    }
+
+    /**
+     * Get es_youtube
+     *
+     * @return boolean 
+     */
+    public function getEsYoutube()
+    {
+        return $this->es_youtube;
+    }
+}

@@ -1,0 +1,36 @@
+{% extends '::frontend.html.twig' %}
+{% block title %}{{project_name}}{% endblock %}
+{% block body %} 
+
+    <section class="row">
+
+        <section class="col-md-12 aplicaciones">
+
+            <div class="box_text_detalle">
+                <div class="panel panel-info">
+
+                    <div class="col-md-12 iniciar-sesion">  
+                        <div class="fos_user_user_show">
+                            <div class="usuario">
+                                {% for type, messages in app.session.flashBag.all %}
+                                    {% for message in messages %}
+                                        <div class="{{ type }}">
+                                            {{ message|trans({}, 'FOSUserBundle') }}
+                                        </div>
+                                    {% endfor %}
+                                {% endfor %}
+
+                                <div>
+                                    {% block fos_user_content %}
+                                    {% endblock fos_user_content %}
+                                </div>
+                            </div>
+                        </div>   
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+
+{% endblock %}
+

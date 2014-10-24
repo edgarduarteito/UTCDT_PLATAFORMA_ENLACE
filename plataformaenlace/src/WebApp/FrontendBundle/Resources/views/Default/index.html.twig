@@ -1,0 +1,102 @@
+{% extends '::aula.html.twig' %}
+{% block title %}{{project_name}}{% endblock %}
+ 
+{% block body %} 
+    <div class="contenedor">
+         	
+                <div class="row">
+                	<section class="col-lg-8">
+                    	<h1>Aulas Musicales</h1>
+                        
+                    	<div class="row aulas">
+                            {%for aula in pagination%}
+                        	<article class="col-md-6">
+                                    {%set contador=0%}
+                    {%set foto=null%}
+                    {%for imagen in aula.getAulaFotos%}
+                        {%set contador = contador+1%}
+                    {%endfor%}
+                    {%if contador>0%}
+                        {%set foto= random(aula.getAulaFotos)%}
+                    {%endif%}
+                     {%if foto!=""%}
+                            <img src="http://{{app.request.host ~ foto.viewImage}}" alt="img-noticias"/> 
+                        {%else%}
+                            <img src="http://{{app.request.host}}/bundles/webappfrontend/images/no-hay-foto.png" alt="img-noticias">
+
+                        {%endif%}
+                            	
+                                <h4>{{aula.titulo|truncate(70)}}</h4>
+                                <p class="lead">{{aula.descripcion|truncate(100)|raw}}</p>
+                                <a href="{{path('web_app_frontend_detalle_aula', {'slug': aula.slug})}}">Leer más</a>
+                            </article>
+                        {%endfor%}
+                            
+                           
+                        </div>
+                         <div class="btn-toolbar" role="toolbar">
+                                <div class="count">
+                    Total resultados: {{ pagination.getTotalItemCount }}
+                </div>
+                              <div class="btn-group">
+                              	{{ knp_pagination_render(pagination) }}
+                              </div>         
+                            </div>
+                    </section>
+                    <section class="col-lg-4">
+                    	<div class="filtro">
+                        <form role="form">
+                          <div class="form-group">
+                            <label for="">Escoge un municipio</label>
+                            {{form_widget(form.municipio, {'attr': {'placeholder': 'Municipio'}})}}
+                          </div>
+                          <div class="form-group">
+                            <label for="exampleInputPassword1">Buscar por palabra</label>
+                            {{form_widget(form.titulo, {'attr': {'placeholder': 'Buscar'}})}}
+                          </div>
+                          <button type="submit" class="btn btn-default" name="submit-filter">Filtrar</button>
+                          <button type="reset" class="btn bg-danger" onClick="window.location.href = '{{url(app.request.attributes.get('_route'))}}'" >Limpiar</button>
+                        </form>
+                        </div>
+                        
+                    	<h3 class="titulo-cronograma">Cronograma de eventos</h3>
+                        
+
+                        <div class="calendario">
+                            <div id="eventCalendarParaNacionales"></div>
+                        	
+                                <!--- Codigo Javascript Calendario -->
+                                 <script>
+                            $(document).ready(function() {
+                                $("#eventCalendarParaNacionales").eventCalendar({
+                                    eventsjson: '{{path('web_app_frontend_calendar')}}',
+                                    cacheJson: false,
+                                    monthNames: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+                                        "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
+                                    dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles',
+                                        'Jueves', 'Viernes', 'Sabado'],
+                                    dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
+                                    txt_noEvents: "No hay eventos para este periodo",
+                                    txt_SpecificEvents_prev: "",
+                                    txt_SpecificEvents_after: "eventos:",
+                                    txt_next: "siguiente",
+                                    txt_prev: "anterior",
+                                    txt_NextEvents: "Próximos eventos:",
+                                    txt_GoToEventUrl: "Ir al evento",
+                                    eventsScrollable: true,
+                                    showDescription: true,
+                                                                        
+                                });
+                            });
+                        </script>
+                                 <!---  fin Codigo Javascript Calendario -->
+                        </div>
+                        <section class="blanco">
+                        	
+                        </section>
+                                                
+                    </section>
+                </div>
+            </div>
+         
+{% endblock %}

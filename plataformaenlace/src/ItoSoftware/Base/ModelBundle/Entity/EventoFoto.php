@@ -1,0 +1,277 @@
+<?php
+
+namespace ItoSoftware\Base\ModelBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Utilities\ApplicationBoot;
+
+/**
+ * EventoFoto
+ */
+class EventoFoto
+{
+    
+    //--------------------------------------------------------------------------------
+    //--------------------------------------------------------------------------------
+    //ADICIONES
+    //
+    public function getViewImage() {
+        if ($this->getFoto()) {
+            return $this->getUploadDir() . '/' . $this->getFoto();
+        } else {
+            return null;
+        }
+    }
+
+    public function setViewImage($value) {
+        
+    }
+    const UPLOAD_DIR = "/uploads/eventos";
+
+    public function upload() {
+        // the file property can be empty if the field is not required
+        if (null === $this->getFoto()) {
+            return;
+        }
+        
+        $basepath = ApplicationBoot::getContainer()->get('kernel')->getRootDir() . '/../web/';
+        $nombre_archivo = $this->obtenerNuevoNombreArchivo($this->getFoto()->getClientOriginalName());
+        // we use the original file name here but you should
+        // sanitize it at least to avoid any security issues
+        // move takes the target directory and target filename as params
+        
+        
+        $this->getFoto()->move($this->getUploadRootDir($basepath), $nombre_archivo);
+        
+        // set the path property to the filename where you've saved the file
+        $this->setFoto($nombre_archivo);
+    }
+    
+    public function obtenerNuevoNombreArchivo($nombre_original) {
+        $nombre_archivo_array = explode('.', $nombre_original);
+        $extension_archivo = $nombre_archivo_array[count($nombre_archivo_array) - 1];
+        $nombre_picture = rand(1, 9999) . '_picture_' . date('YmsHis') . '.' . $extension_archivo;
+        return $nombre_picture;
+    }
+    protected function getUploadRootDir() {
+        // the absolute directory path where uploaded documents should be saved
+        $basepath = ApplicationBoot::getContainer()->get('kernel')->getRootDir() . '/../web/';
+        return $basepath . $this->getUploadDir();
+    }
+
+    protected function getUploadDir() {
+        // get rid of the __DIR__ so it doesn't screw when displaying uploaded doc/image in the view.
+        return self::UPLOAD_DIR;
+    }
+    
+
+//    ******************************************************************************************
+//    ****MODIFICACIONES
+//    ******************************************************************************************    
+    /**
+     * @ORM\PrePersist
+     */
+    public function setCreatedAtValue() {
+        $this->activo = true;
+        $this->created_at = new \DateTime();
+        $this->updated_at = new \DateTime();
+    }
+
+    /**
+     * @ORM\PreUpdate
+     */
+    public function setUpdatedAtValue() {
+        $this->updated_at = new \DateTime();
+    }
+    
+    public function __toString() {
+        return $this->getNombre();
+    }
+
+    //--------------------------------------------------------------------------------
+    //--------------------------------------------------------------------------------
+    //FIN FUNCIONES MODIFICADAS
+    /**
+     * @var string
+     */
+    private $nombre;
+
+    /**
+     * @var string
+     */
+    private $foto;
+
+    /**
+     * @var string
+     */
+    private $descripcion;
+
+    /**
+     * @var \DateTime
+     */
+    private $created_at;
+
+    /**
+     * @var \DateTime
+     */
+    private $updated_at;
+
+    /**
+     * @var integer
+     */
+    private $id;
+
+    /**
+     * @var \ItoSoftware\Base\ModelBundle\Entity\Evento
+     */
+    private $evento;
+
+
+    /**
+     * Set nombre
+     *
+     * @param string $nombre
+     * @return HotelFoto
+     */
+    public function setNombre($nombre)
+    {
+        $this->nombre = $nombre;
+
+        return $this;
+    }
+
+    /**
+     * Get nombre
+     *
+     * @return string 
+     */
+    public function getNombre()
+    {
+        return $this->nombre;
+    }
+
+    /**
+     * Set foto
+     *
+     * @param string $foto
+     * @return HotelFoto
+     */
+    public function setFoto($foto)
+    {
+        $this->foto = $foto;
+
+        return $this;
+    }
+
+    /**
+     * Get foto
+     *
+     * @return string 
+     */
+    public function getFoto()
+    {
+        return $this->foto;
+    }
+
+    /**
+     * Set descripcion
+     *
+     * @param string $descripcion
+     * @return HotelFoto
+     */
+    public function setDescripcion($descripcion)
+    {
+        $this->descripcion = $descripcion;
+
+        return $this;
+    }
+
+    /**
+     * Get descripcion
+     *
+     * @return string 
+     */
+    public function getDescripcion()
+    {
+        return $this->descripcion;
+    }
+
+    /**
+     * Set created_at
+     *
+     * @param \DateTime $createdAt
+     * @return HotelFoto
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->created_at = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get created_at
+     *
+     * @return \DateTime 
+     */
+    public function getCreatedAt()
+    {
+        return $this->created_at;
+    }
+
+    /**
+     * Set updated_at
+     *
+     * @param \DateTime $updatedAt
+     * @return HotelFoto
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updated_at = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get updated_at
+     *
+     * @return \DateTime 
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updated_at;
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set hotel
+     *
+     * @param \ItoSoftware\Base\ModelBundle\Entity\Evento $evento
+     * @return EventoFoto
+     */
+    public function setEvento(\ItoSoftware\Base\ModelBundle\Entity\Evento $evento = null)
+    {
+        $this->evento = $evento;
+
+        return $this;
+    }
+
+    /**
+     * Get evento
+     *
+     * @return \ItoSoftware\Base\ModelBundle\Entity\Evento
+     */
+    public function getEvento()
+    {
+        return $this->evento;
+    }
+}

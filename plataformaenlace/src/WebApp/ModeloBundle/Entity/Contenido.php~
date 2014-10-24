@@ -1,0 +1,453 @@
+<?php
+
+namespace WebApp\ModeloBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use ItoSoftware\Base\ToolBundle\Model\ApplicationBoot;
+use Symfony\Component\Validator\Constraints as Assert;
+
+/**
+ * Contenido
+ * @ORM\Entity 
+ * @ORM\Table(name="contenido")
+ * @ORM\Entity( repositoryClass="WebApp\ModeloBundle\Entity\ContenidoRepository")
+ *
+ */
+class Contenido {
+    
+    /*
+     * 
+     */
+    static $UPLOAD_DIR = 'uploads/media';
+    
+    /*
+     * 
+     */
+    static $name_thumb = "thumb_";
+    
+    /*
+     * 
+     */
+    static $name_medium = "medium_";
+
+    /**
+     * @var integer
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    /**
+     * @var string
+     * @ORM\Column(name="titulo", type="string", length=255)
+     */
+    private $titulo;
+
+    /**
+     * @var text
+     * @ORM\Column(name="descripcion", type="text", nullable=true)
+     */
+    private $descripcion;
+
+    /**
+     * @var string
+     * @ORM\Column(name="mime_type", type="string", length=255, nullable=true)
+     */
+    private $mime_type;
+
+    /**
+     * @var string
+     * @ORM\Column(name="archivo", type="string", length=255, nullable=true)
+     * @Assert\File(
+     *      maxSize = "6M",
+     *      mimeTypes = {   "audio/mp4"
+     *                      ,"audio/mpeg"
+     *                      ,"audio/ogg"
+     *                      ,"audio/mp3"
+     *                      ,"image/jpeg"
+     *                      ,"image/pjpeg"
+     *                      ,"image/png"
+     *                      ,"image/svg+xml"
+     *                      ,"video/avi"
+     *                      ,"video/mpeg"
+     *                      ,"video/mp4"
+     *                      ,"video/ogg"
+     *                      ,"application/ogg"
+     *                  }
+     * )
+     */
+    private $archivo;
+
+    /**
+     * @var string
+     * @ORM\Column(name="archivo_respaldo", type="string", length=255, nullable=true)
+     * @Assert\File(
+     *      maxSize = "6M",
+     *      mimeTypes = {   "audio/mp4"
+     *                      ,"audio/mpeg"
+     *                      ,"audio/ogg"
+     *                      ,"audio/mp3"
+     *                      ,"video/avi"
+     *                      ,"video/mpeg"
+     *                      ,"video/mp4"
+     *                      ,"video/ogg"
+     *                      ,"application/ogg"
+     *                  }
+     * )
+     */
+    private $archivo_respaldo;
+
+    /**
+     * @var string
+     * @ORM\Column(name="mime_type_respaldo", type="string", length=255, nullable=true)
+     */
+    private $mime_type_respaldo;
+
+    /**
+     * @var string
+     * @ORM\Column(name="poster", type="text", nullable=true)
+     * @Assert\File(
+     *      maxSize = "10M",
+     *      mimeTypes = {   "image/jpeg"
+     *                      ,"image/pjpeg"
+     *                      ,"image/png"
+     *                  }
+     * ) 
+     */
+    private $poster;
+
+    /**
+     * @var type 
+     * WebApp\ModeloBundle\Entity\TipoContenido
+     * @ORM\ManyToOne(targetEntity="TipoContenido", inversedBy="contenidos")
+     * @ORM\JoinColumn(name="tipo_contenido_id", referencedColumnName="id")
+     * 
+     */
+    private $tipo_contenido;
+    
+    
+    /**
+     * @var text
+     * @ORM\Column(name="url_video_youtube", type="text", nullable=true)
+     */
+    private $url_video_youtube;
+
+    /**
+     * Manages the copying of the file to the relevant place on the server
+     */
+    public function upload(UploadedFile $file, UploadedFile $file_respaldo = null) {
+        if (null === $this->getArchivo()) {
+        } else {
+            $directorio_destino = ApplicationBoot::getContainer()->get('kernel')->getRootDir() . '/../web/' . self::$UPLOAD_DIR;
+            $ext = pathinfo($file->getClientOriginalName(), PATHINFO_EXTENSION);
+            $nombre_archivo = uniqid(date('YmdHis')) . '.' . $ext;
+            $this->setMimeType($file->getMimeType());
+            $file->move($directorio_destino, $nombre_archivo);
+            $this->setArchivo($nombre_archivo);
+        }
+
+        if (null === $this->getArchivoRespaldo()) {
+            return;
+        } else {
+            $ext = pathinfo($file_respaldo->getClientOriginalName(), PATHINFO_EXTENSION);
+            $nombre_archivo = uniqid(date('YmdHis')) . '.' . $ext;
+            $this->setMimeTypeRespaldo($file_respaldo->getMimeType());
+            $file_respaldo->move($directorio_destino, $nombre_archivo);
+            $this->setArchivoRespaldo($nombre_archivo);
+        }
+    }
+    
+    //Gestión del poster
+    public function getUrlPoster() {
+        return 'http://' . $_SERVER['SERVER_NAME'] . '/' . self::$UPLOAD_DIR . '/' . $this->getPoster();
+    }
+
+    public function getUrlThumbPoster() {
+        $file = ApplicationBoot::getContainer()->get('kernel')->getRootDir() . '/../web' . self::$UPLOAD_DIR . '/' . self::$name_thumb . $this->getPoster();
+        if (file_exists($file)) {
+            return 'http://' . $_SERVER['SERVER_NAME'] . self::$UPLOAD_DIR . '/' . self::$name_thumb . $this->getPoster();
+        }
+        return $this->getUrlPoster();
+    }
+    
+    public function getUrlMediumPoster() {
+        $file = ApplicationBoot::getContainer()->get('kernel')->getRootDir() . '/../web' . self::$UPLOAD_DIR . '/' . self::$name_medium . $this->getPoster();
+        if (file_exists($file)) {
+            return 'http://' . $_SERVER['SERVER_NAME'] . self::$UPLOAD_DIR . '/' . self::$name_medium . $this->getPoster();
+        }
+        return $this->getUrlThumbPoster();
+    }
+
+    public function uploadPoster(UploadedFile $poster) {
+        if (null === $this->getPoster()) {
+            return;
+        }
+        $directorio_destino = ApplicationBoot::getContainer()->get('kernel')->getRootDir() . '/../web/' . self::$UPLOAD_DIR;
+        $ext = pathinfo($poster->getClientOriginalName(), PATHINFO_EXTENSION);
+        $nombre_archivo_poster = uniqid(date('YmdHis')) . '.' . $ext;
+        $poster->move($directorio_destino, $nombre_archivo_poster);
+        $this->setPoster($nombre_archivo_poster);
+        $this->generateThumbnails(self::$name_medium, null, null, null, null, 150, 100);
+        $this->generateThumbnails(self::$name_thumb, null, null, null, null, 75, 50);
+    }
+    
+    public function generateThumbnails($tipo, $x = null, $y = null, $w = null, $h = null, $width = 400, $height = 330) {
+        try {
+            $directorio_destino = ApplicationBoot::getContainer()->get('kernel')->getRootDir() . '/../web/' . self::$UPLOAD_DIR;
+
+            if (file_exists($directorio_destino . $this->getPoster())) {
+
+                $targ_w = $width;
+                $targ_h = $height;
+
+                $value = explode(".", $this->getPoster());
+                $ext = end($value);
+                $src = $directorio_destino . $this->getPoster();
+
+                if ($ext == 'png' || $ext == 'PNG')
+                    $img_r = imagecreatefrompng($src);
+                if ($ext == 'jpg' || $ext == 'jpeg' || $ext == 'JPG' || $ext == 'JPEG')
+                    $img_r = imagecreatefromjpeg($src);
+                
+                $dst_r = ImageCreateTrueColor($targ_w, $targ_h);
+
+                if ($x == null & $y == null & $w == null & $h == null) {
+                    $size_img = getimagesize($src);
+                    $x = 0;
+                    $y = 0;
+                    $w = $size_img[0];
+                    $h = $size_img[1];
+                    if ($size_img[1] > $size_img[0]) {
+                        $y = $size_img[1] / 4;
+                        $h = $w - ($w / 8);
+                    }
+                }
+                imagecopyresampled($dst_r, $img_r, 0, 0, $x, $y, $targ_w, $targ_h, $w, $h);
+
+                ob_start();
+                imagepng($dst_r);
+
+                $i = ob_get_clean();
+                $fp = fopen($directorio_destino . $tipo . $this->getPoster(), 'w');
+                fwrite($fp, $i);
+                fclose($fp);
+            }
+        } catch (\Exceptiontion $e) {
+        }
+    }
+
+    public function __toString() {
+        return $this->getTitulo() ? $this->getTitulo() : 'Nuevo contenido';
+    }
+
+    public function getWebPathArchivo() {
+        return null === $this->archivo ? null : 'http://' . $_SERVER['HTTP_HOST'] . '/' . self::$UPLOAD_DIR . '/' . $this->getArchivo();
+    }
+
+    public function getWebPathArchivoRespaldo() {
+        return null === $this->archivo_respaldo ? null : 'http://' . $_SERVER['HTTP_HOST'] . '/' . self::$UPLOAD_DIR . '/' . $this->getArchivoRespaldo();
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId() {
+        return $this->id;
+    }
+
+    /**
+     * Set titulo
+     *
+     * @param string $titulo
+     * @return Contenido
+     */
+    public function setTitulo($titulo) {
+        $this->titulo = $titulo;
+
+        return $this;
+    }
+
+    /**
+     * Get titulo
+     *
+     * @return string 
+     */
+    public function getTitulo() {
+        return $this->titulo;
+    }
+
+    /**
+     * Set descripcion
+     *
+     * @param string $descripcion
+     * @return Contenido
+     */
+    public function setDescripcion($descripcion) {
+        $this->descripcion = $descripcion;
+
+        return $this;
+    }
+
+    /**
+     * Get descripcion
+     *
+     * @return string 
+     */
+    public function getDescripcion() {
+        return $this->descripcion;
+    }
+
+    /**
+     * Set archivo
+     *
+     * @param string $archivo
+     * @return Contenido
+     */
+    public function setArchivo($archivo) {
+        $this->archivo = $archivo;
+
+        return $this;
+    }
+
+    /**
+     * Get archivo
+     *
+     * @return string 
+     */
+    public function getArchivo() {
+        return $this->archivo;
+    }
+
+    /**
+     * Set tipo_contenido
+     *
+     * @param \WebApp\ModeloBundle\Entity\TipoContenido $tipoContenido
+     * @return Contenido
+     */
+    public function setTipoContenido(\WebApp\ModeloBundle\Entity\TipoContenido $tipoContenido = null) {
+        $this->tipo_contenido = $tipoContenido;
+
+        return $this;
+    }
+
+    /**
+     * Get tipo_contenido
+     *
+     * @return \WebApp\ModeloBundle\Entity\TipoContenido 
+     */
+    public function getTipoContenido() {
+        return $this->tipo_contenido;
+    }
+
+    /**
+     * Set mime_type
+     *
+     * @param string $mimeType
+     * @return Contenido
+     */
+    public function setMimeType($mimeType) {
+        $this->mime_type = $mimeType;
+
+        return $this;
+    }
+
+    /**
+     * Get mime_type
+     *
+     * @return string 
+     */
+    public function getMimeType() {
+        return $this->mime_type;
+    }
+
+    /**
+     * Set archivo_respaldo
+     *
+     * @param string $archivoRespaldo
+     * @return Contenido
+     */
+    public function setArchivoRespaldo($archivoRespaldo) {
+        $this->archivo_respaldo = $archivoRespaldo;
+
+        return $this;
+    }
+
+    /**
+     * Get archivo_respaldo
+     *
+     * @return string 
+     */
+    public function getArchivoRespaldo() {
+        return $this->archivo_respaldo;
+    }
+
+    /**
+     * Set mime_type_respaldo
+     *
+     * @param string $mimeTypeRespaldo
+     * @return Contenido
+     */
+    public function setMimeTypeRespaldo($mimeTypeRespaldo) {
+        $this->mime_type_respaldo = $mimeTypeRespaldo;
+
+        return $this;
+    }
+
+    /**
+     * Get mime_type_respaldo
+     *
+     * @return string 
+     */
+    public function getMimeTypeRespaldo() {
+        return $this->mime_type_respaldo;
+    }
+
+    /**
+     * Set poster
+     *
+     * @param string $poster
+     * @return Contenido
+     */
+    public function setPoster($poster) {
+        $this->poster = $poster;
+
+        return $this;
+    }
+
+    /**
+     * Get poster
+     *
+     * @return string 
+     */
+    public function getPoster() {
+        return $this->poster;
+    }
+
+
+    /**
+     * Set url_video_youtube
+     *
+     * @param string $urlVideoYoutube
+     * @return Contenido
+     */
+    public function setUrlVideoYoutube($urlVideoYoutube)
+    {
+        $this->url_video_youtube = $urlVideoYoutube;
+    
+        return $this;
+    }
+
+    /**
+     * Get url_video_youtube
+     *
+     * @return string 
+     */
+    public function getUrlVideoYoutube()
+    {
+        return $this->url_video_youtube;
+    }
+}

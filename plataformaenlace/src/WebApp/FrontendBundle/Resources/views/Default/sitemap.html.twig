@@ -1,0 +1,20 @@
+{% extends '::eventodetalletwig.html.twig' %}
+{% block title %}{{project_name}}{% endblock %}
+{% block body %} 
+    <div class="contenedor">
+            	
+                <div class="row">
+                	<section class="col-lg-8">
+                    	 <ul class="mapa-sitio">
+        {%for url in urls%}
+            <li><a href="{{path(url.path)}}">{{url.nombre}}</a></li>
+        {%endfor%}
+    </ul>
+                    </section>
+                    <section class="col-lg-4">
+                    	        
+                    </section>
+                </div>
+            </div>
+   
+{% endblock %}

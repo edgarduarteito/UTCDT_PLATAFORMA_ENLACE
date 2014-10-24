@@ -1,0 +1,12 @@
+<div class="row-fluid">
+    <div class="col-lg-5">
+<td class="table-condensed" objectid="{{object.id}}">
+    <strong>Fecha del evento</strong> 
+  </td>
+     <div class="col-lg-5">
+<td class="table-condensed" objectid="{{object.id}}">
+    {%if(object.getFecha)%}
+        {{object.getFecha|localizeddate('none', 'none', 'es', null, " dd  'de'  MMMM Y  hh:mm aaa")}}  
+    {%endif%}
+</td>
+</div></div>

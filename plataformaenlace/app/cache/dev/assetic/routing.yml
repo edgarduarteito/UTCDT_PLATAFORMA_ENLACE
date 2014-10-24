@@ -1,0 +1,5 @@
+_assetic:
+    resource: .
+    type: assetic
+_app:
+    resource: /Library/WebServer/Documents/sfproject/UTCDT_GESTION_CONTENIDOS_DIGITALES/plataformaenlace/app/config/routing_dev.yml

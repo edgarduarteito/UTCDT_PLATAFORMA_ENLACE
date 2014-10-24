@@ -1,0 +1,19 @@
+web_app_api_tipo_contenido:
+    resource: WebApp\ApiBundle\Controller\TipoContenidoController
+    prefix: /
+    type:   rest
+    
+web_app_api_audio:
+    resource: WebApp\ApiBundle\Controller\AudioController
+    prefix: /
+    type:   rest
+    
+web_app_api_imagen:
+    resource: WebApp\ApiBundle\Controller\ImagenController
+    prefix: /
+    type:   rest
+    
+web_app_api_video:
+    resource: WebApp\ApiBundle\Controller\VideoController
+    prefix: /
+    type:   rest

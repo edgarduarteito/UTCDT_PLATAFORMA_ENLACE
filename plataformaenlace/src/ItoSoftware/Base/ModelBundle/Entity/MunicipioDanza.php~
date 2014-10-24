@@ -1,0 +1,193 @@
+<?php
+
+namespace ItoSoftware\Base\ModelBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * MunicipioDanza
+ */
+class MunicipioDanza
+{
+    
+    
+//    ******************************************************************************************
+//    ****ADICIONES
+//    ******************************************************************************************
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function setCreatedAtValue() {
+        $this->activo = true;
+        $this->created_at = new \DateTime();
+        $this->updated_at = new \DateTime();
+    }
+
+    /**
+     * @ORM\PreUpdate
+     */
+    public function setUpdatedAtValue() {
+        $this->updated_at = new \DateTime();
+    }
+
+//    ******************************************************************************************
+//    ****MODIFICACIONES
+//    ******************************************************************************************    
+
+    /**
+     * @var string
+     */
+    private $descripcion;
+
+    /**
+     * @var integer
+     */
+    private $id;
+
+    /**
+     * @var \ItoSoftware\Base\ModelBundle\Entity\Municipio
+     */
+    private $municipio;
+
+    /**
+     * @var \ItoSoftware\Base\ModelBundle\Entity\Danza
+     */
+    private $danza;
+
+
+    /**
+     * Set descripcion
+     *
+     * @param string $descripcion
+     * @return MunicipioDanza
+     */
+    public function setDescripcion($descripcion)
+    {
+        $this->descripcion = $descripcion;
+
+        return $this;
+    }
+
+    /**
+     * Get descripcion
+     *
+     * @return string 
+     */
+    public function getDescripcion()
+    {
+        return $this->descripcion;
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set municipio
+     *
+     * @param \ItoSoftware\Base\ModelBundle\Entity\Municipio $municipio
+     * @return MunicipioDanza
+     */
+    public function setMunicipio(\ItoSoftware\Base\ModelBundle\Entity\Municipio $municipio = null)
+    {
+        $this->municipio = $municipio;
+
+        return $this;
+    }
+
+    /**
+     * Get municipio
+     *
+     * @return \ItoSoftware\Base\ModelBundle\Entity\Municipio 
+     */
+    public function getMunicipio()
+    {
+        return $this->municipio;
+    }
+
+    /**
+     * Set danza
+     *
+     * @param \ItoSoftware\Base\ModelBundle\Entity\Danza $danza
+     * @return MunicipioDanza
+     */
+    public function setDanza(\ItoSoftware\Base\ModelBundle\Entity\Danza $danza = null)
+    {
+        $this->danza = $danza;
+
+        return $this;
+    }
+
+    /**
+     * Get danza
+     *
+     * @return \ItoSoftware\Base\ModelBundle\Entity\Danza 
+     */
+    public function getDanza()
+    {
+        return $this->danza;
+    }
+    /**
+     * @var \DateTime
+     */
+    private $created_at;
+
+    /**
+     * @var \DateTime
+     */
+    private $updated_at;
+
+
+    /**
+     * Set created_at
+     *
+     * @param \DateTime $createdAt
+     * @return MunicipioDanza
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->created_at = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get created_at
+     *
+     * @return \DateTime 
+     */
+    public function getCreatedAt()
+    {
+        return $this->created_at;
+    }
+
+    /**
+     * Set updated_at
+     *
+     * @param \DateTime $updatedAt
+     * @return MunicipioDanza
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updated_at = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get updated_at
+     *
+     * @return \DateTime 
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updated_at;
+    }
+}

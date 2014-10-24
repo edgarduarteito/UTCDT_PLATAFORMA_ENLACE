@@ -1,0 +1,31 @@
+<div >
+    <div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="panel panel-info">
+
+                    <div class="panel-heading">
+                        <h2 class="panel-title">Recuperar Contraseña</h2>
+                    </div>
+                    <div class="col-md-12 iniciar-sesion"> 
+                        <form action="{{ path('fos_user_resetting_send_email') }}" method="POST" class="fos_user_resetting_request">
+                            <div>
+                                {% if invalid_username is defined %}
+                                    <div class="bg-danger errores">{{ 'resetting.request.invalid_username'|trans({'%username%': invalid_username}, 'FOSUserBundle') }}</div>
+                                {% endif %}
+                                <label for="username" class="col-sm-4 control-label">Nombre usuario o correo electrónico</label>
+                                <input type="text" id="username" name="username" required="required" class="form-control"/>
+                            </div>
+
+                            <div class="btn-sesion">
+                                <input type="submit" value="{{ 'resetting.request.submit'|trans({}, 'FOSUserBundle') }}" class="btn btn-success pull-right"/>
+                            </div>
+                        </form>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

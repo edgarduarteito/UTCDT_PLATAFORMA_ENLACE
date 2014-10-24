@@ -1,0 +1,85 @@
+{
+    "name": "symfony/framework-standard-edition",
+    "license": "MIT",
+    "type": "project",
+    "description": "The \"Symfony Standard Edition\" distribution",
+    "autoload": {
+        "psr-0": { "": "src/" }
+    },
+    "require": {
+        "php": ">=5.3.3",
+        "symfony/symfony": "2.4.*",
+        "doctrine/orm": "2.4.*",
+        "doctrine/doctrine-bundle": "1.2.*",
+        "twig/extensions": "1.0.*",
+        "symfony/assetic-bundle": "2.3.*",
+        "symfony/swiftmailer-bundle": "2.3.*",
+        "symfony/monolog-bundle": "2.3.*",
+        "sensio/distribution-bundle": "2.3.*",
+        "sensio/framework-extra-bundle": "2.3.*",
+        "sensio/generator-bundle": "2.3.*",
+        "incenteev/composer-parameter-handler": "~2.0",
+        "sonata-project/core-bundle": "~2.2@dev",
+        "sonata-project/admin-bundle": "2.3.*@dev",
+        "sonata-project/doctrine-orm-admin-bundle": "dev-master#4ec27dd08779be47c3a1c4beb6eb203178b98d37",
+        "sonata-project/block-bundle": "2.2.*",
+        "sonata-project/user-bundle": "2.2.*@dev",
+        "friendsofsymfony/user-bundle": "1.3.*",
+        "friendsofsymfony/rest-bundle": "1.1.*",
+        "nelmio/api-doc-bundle": "2.5.x-dev",
+        "doctrine/doctrine-fixtures-bundle": "2.1.*@dev",
+        "doctrine/data-fixtures": "1.0.*@dev",
+        "knplabs/knp-menu-bundle": "1.1.x-dev",
+        "sonata-project/easy-extends-bundle": "2.1.*",
+        "sonata-project/cache-bundle": "2.1.*",
+        "sonata-project/intl-bundle": "dev-master",
+        "jms/serializer-bundle": "0.12.*",
+        "jms/di-extra-bundle": "~1.3",
+        "egeloen/google-map": "1.4.*@dev",
+        "egeloen/google-map-bundle": "2.2.*@dev",
+        "willdurand/geocoder": "2.5.*@dev",
+        "widop/http-adapter": "1.1.*@dev",
+        "widop/http-adapter-bundle": "1.2.*@dev",
+        "psr/log": "1.0.*@dev",
+        "willdurand/jsonp-callback-validator": "v1.0.0",
+        "willdurand/negotiation": "1.3.*@dev",
+        "doctrine/inflector": "1.0.*@dev",
+        "friendsofsymfony/rest-bundle": "1.4.*@dev",
+        "ornicar/akismet-bundle": "dev-master",
+        "samj/doctrine-sluggable-bundle": "2.4.*@dev",
+        "lexik/form-filter-bundle": "2.*@dev",
+        "knplabs/knp-paginator-bundle": "2.4.*@dev",
+        "stfalcon/tinymce-bundle": "0.3.*@dev",
+        "genemu/form-bundle": "2.2.*@dev"
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile"
+        ],
+        "post-update-cmd": [
+            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile"
+        ]
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "minimum-stability": "stable",
+    "extra": {
+        "symfony-app-dir": "app",
+        "symfony-web-dir": "web",
+        "incenteev-parameters": {
+            "file": "app/config/parameters.yml"
+        },
+        "branch-alias": {
+            "dev-master": "2.3-dev"
+        }
+    }
+}

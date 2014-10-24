@@ -1,0 +1,295 @@
+@charset "UTF-8";
+/* agregados*/
+.facebook{
+    border-top:1px solid rgba(204,204,204,1);
+    border-bottom:1px solid rgba(204,204,204,1);
+    background-color:#f7f8fa;
+    width:100%;
+    position:relative;
+    margin:25px 0;
+    padding:10px 0;
+}
+.facebook p{
+    position:relative;
+    width:100%;
+    height:auto;
+    color:#0075b6;
+    text-align:center;
+    padding:0;
+    margin:50px 0;
+}
+.iniciar-sesion{
+    text-align:center;
+    width:100%;
+    float:left;
+    background-color:rgba(0,0,0,0.04)
+}
+/**/
+/* CSS Document */
+body{
+	width:100%;
+	height:100%;
+	margin:0;
+	padding:0;
+	background-image:url(../images/bg.png);
+}
+.supercontainer{
+	width:1024px;
+	margin:0 auto;
+	border-top:5px solid #0CA0DB;
+	}
+.logo{
+	width:50%;
+	float:left;
+	}
+.login{
+	margin:10px 0;
+	width:45%;
+	float:right;
+	padding:0 2.5%;
+	background-color:rgba(255,255,255,1);
+	border-radius:5px;
+	}
+.login form{
+	margin-top:2%;
+	}
+.login form .form-group{
+	width:50%;
+	float:left;
+	margin:0 0 5px 0;
+	}
+.login form .form-group input{
+	width:90%;
+	float:left;
+	margin-right:10%;
+	border:1px solid #FFCA05;
+	}
+.login form button{
+	width:95%;
+	float:left;
+	margin:0 0 10px 0;
+	background-color:#FFCA05;
+	}
+.menu{
+	width:100%;
+	float:left;
+	background: #d02027; /* Old browsers */
+	background: -moz-linear-gradient(left, #d02027 20%, #ac1a21 80%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, right top, color-stop(20%,#d02027), color-stop(80%,#ac1a21)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(left, #d02027 20%,#ac1a21 80%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(left, #d02027 20%,#ac1a21 80%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(left, #d02027 20%,#ac1a21 80%); /* IE10+ */
+	background: linear-gradient(to right, #d02027 20%,#ac1a21 80%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d02027', endColorstr='#ac1a21',GradientType=1 ); /* IE6-9 */
+	}
+.menu ul{
+	margin:0;
+	list-style-type:none;
+	width:100%;
+	padding:0;
+	float:left;
+}
+.menu ul li{
+	display:inline-block;
+	float:left;
+	width:auto;
+	padding:15px 0;
+	border-right:1px solid rgba(255,255,255,1);
+	}
+.menu ul li a{
+	margin: auto 20px;
+	text-decoration:none;
+	color:rgba(255,255,255,1);
+	}
+
+.aulas article img{
+	width:100%;
+	max-height:180px;
+	}
+.aulas article p{
+	font-size:0.9em;
+	}
+.calendario{
+	width:100%;
+	float:left;
+	margin:0 0 20px 0;
+	}
+.calendario img{
+	width:100%;
+	float:left;
+	}
+.estrellas{
+	list-style-type:none;
+	width:auto;
+	float:right;
+	}
+.estrellas li{
+	display:inline-block;
+}
+.estrellas li img{
+	width:15px !important;
+	height:auto !important;
+	}
+.lista-eventos{
+	float:left;
+	border-bottom:1px solid rgba(204,204,204,1);
+	padding-bottom:10px;
+	}
+.lista-eventos img{
+	width:30%;
+	float:left;
+	height:80px;
+	margin-right:5px;
+	}
+.lista-eventos h5{
+	width:auto;
+	color:#BBBDBF;
+}
+.lista-eventos .lead{
+	width: 67%;
+float: left;
+font-size: 0.9em;
+margin: 0;
+height: 55px;
+overflow: hidden;
+	}
+.logo-tolima{
+	width:100%;
+	float:left;
+	text-align:center;}
+.logo-tolima img{
+	width:60%;
+	margin:auto;
+}
+.contador{
+	text-align:center;
+	font-size:0.9em;
+	font-family:Arial, Helvetica, sans-serif;
+	}
+.blanco{
+	width:100%;
+	float:left;
+	background-color:rgba(255,255,255,1);
+	border-radius:5px;
+	}
+.blanco article{
+	margin:10px;
+	}
+.filtro{
+	margin-top:70px;
+	width:95%;
+	float:left;
+	background-color:rgba(255,255,255,1);
+	padding:2.5%;
+	}
+.filtro form button{
+	margin:0 5%;
+	}
+.filtro form .form-group select{
+	width:90%;
+	margin:5px 5%;
+	}
+.filtro form .form-group label{
+	width:90%;
+	margin: 0 5%;	
+	}
+.filtro form .form-group input{
+	width:90%;
+	margin:10px 5%;
+	float:left;
+	box-shadow:none;
+	border-radius:5px;
+	border:1px solid #FFCA05;
+	padding:5px;
+	}
+.titulo-cronograma{
+	width:100%;
+	float:left;
+	margin-top:10px;
+}
+
+
+
+.migas-de-pan{
+    width: 99%;
+    float: left;
+    border-bottom: 1px solid #e74c3c;
+    margin: 20px 0;
+}
+.migas-de-pan p{
+    display: inline-block;
+    font-size: 0.9em;
+    padding:0 0 5px 0 ;
+    margin: 0;
+    color: #333;
+}
+.detalle{
+    background-color: #FFF;
+}
+.detalle .lead{
+    font-size: 1.1em;
+}
+.detalle time{
+    font-size: 0.8em;
+    color:#269abc;
+}
+.detalle img{
+    width: 100%;
+    float: left;
+    margin-bottom: 10px;
+}
+.container{
+    margin-top: 5%;
+}
+.section-comentarios{
+    width: 39.66666667%;
+    margin: 0 1%;
+}
+.section-comentarios form{
+    background-color: #FFF;
+    width: 100%;
+    float: left;
+	margin-top:10px;
+}
+.section-comentarios form button{
+    width: 30%;
+    float:left;
+    margin: 10px 0 0 5%;
+}
+.section-comentarios form label{
+    width: 90%;
+    float: left;
+    margin: 10px 5%;
+}
+.section-comentarios form textArea{
+    width: 90%;
+    margin: 0 5%;
+}
+.todos-comentarios{
+    margin: 20px 0;
+    float: left;
+    padding:  0 15px;
+    background-color: #FFF;
+    width: 100%;
+}
+.n-comentarios{
+    width: 100%;
+    font-size: 1.3em;
+    color: #e74c3c;
+    margin: 10px 0;
+}
+.comentario{
+    padding: 10px 2.5%;
+    float: left;
+    background-color: #ccc;
+    margin: 0 0 20px 0;
+    border-radius: 3px;
+}
+.comentario .lead{
+    font-size: 0.9em;
+    width: 100%;
+    float: left;
+    background-color: #FFF;
+    margin: 0;
+    padding: 10px 2.5%;
+}

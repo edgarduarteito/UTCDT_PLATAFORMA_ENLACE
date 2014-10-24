@@ -1,0 +1,193 @@
+<?php
+
+namespace ItoSoftware\Base\ModelBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * ComentarioEvento
+ */
+class ComentarioEvento
+{
+    
+    
+//    ******************************************************************************************
+//    ****ADICIONES
+//    ******************************************************************************************
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function setCreatedAtValue() {
+        $this->activo = true;
+        $this->created_at = new \DateTime();
+        $this->updated_at = new \DateTime();
+    }
+
+    /**
+     * @ORM\PreUpdate
+     */
+    public function setUpdatedAtValue() {
+        $this->updated_at = new \DateTime();
+    }
+
+//    ******************************************************************************************
+//    ****MODIFICACIONES
+//    ******************************************************************************************    
+
+    /**
+     * @var string
+     */
+    private $texto;
+
+    /**
+     * @var \DateTime
+     */
+    private $created_at;
+
+    /**
+     * @var \DateTime
+     */
+    private $updated_at;
+
+    /**
+     * @var integer
+     */
+    private $id;
+
+    /**
+     * @var \ItoSoftware\Base\ModelBundle\Entity\User
+     */
+    private $User;
+
+    /**
+     * @var \ItoSoftware\Base\ModelBundle\Entity\Evento
+     */
+    private $evento;
+
+
+    /**
+     * Set texto
+     *
+     * @param string $texto
+     * @return ComentarioEvento
+     */
+    public function setTexto($texto)
+    {
+        $this->texto = $texto;
+
+        return $this;
+    }
+
+    /**
+     * Get texto
+     *
+     * @return string 
+     */
+    public function getTexto()
+    {
+        return $this->texto;
+    }
+
+    /**
+     * Set created_at
+     *
+     * @param \DateTime $createdAt
+     * @return ComentarioEvento
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->created_at = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get created_at
+     *
+     * @return \DateTime 
+     */
+    public function getCreatedAt()
+    {
+        return $this->created_at;
+    }
+
+    /**
+     * Set updated_at
+     *
+     * @param \DateTime $updatedAt
+     * @return ComentarioEvento
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updated_at = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get updated_at
+     *
+     * @return \DateTime 
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updated_at;
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set User
+     *
+     * @param \ItoSoftware\Base\ModelBundle\Entity\User $user
+     * @return ComentarioEvento
+     */
+    public function setUser(\ItoSoftware\Base\ModelBundle\Entity\User $user)
+    {
+        $this->User = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get User
+     *
+     * @return \ItoSoftware\Base\ModelBundle\Entity\User 
+     */
+    public function getUser()
+    {
+        return $this->User;
+    }
+
+    /**
+     * Set evento
+     *
+     * @param \ItoSoftware\Base\ModelBundle\Entity\Evento $evento
+     * @return ComentarioEvento
+     */
+    public function setEvento(\ItoSoftware\Base\ModelBundle\Entity\Evento $evento)
+    {
+        $this->evento = $evento;
+
+        return $this;
+    }
+
+    /**
+     * Get evento
+     *
+     * @return \ItoSoftware\Base\ModelBundle\Entity\Evento 
+     */
+    public function getEvento()
+    {
+        return $this->evento;
+    }
+}

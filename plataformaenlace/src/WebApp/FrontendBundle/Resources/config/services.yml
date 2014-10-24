@@ -1,0 +1,21 @@
+parameters:
+#    web_app_frontend.example.class: WebApp\FrontendBundle\Example
+
+services:
+#    web_app_frontend.example:
+#        class: %web_app_frontend.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
+    preview:
+      class: ItoSoftware\Argus\FrontendBundle\Form\Extension\Type\PreviewType
+      tags:
+        - { name: form.type, alias: preview }
+        
+    view_image:
+          class: WebApp\FrontendBundle\Form\Extension\Type\ViewImageType
+          tags:
+            - { name: form.type, alias: view_image }  
+            
+    file_exits.twig_extension:
+           class: WebApp\FrontendBundle\Twig\Extension\FileExitsExtension
+           tags:
+               - { name: twig.extension }   

@@ -1,0 +1,9 @@
+<td class="sonata-ba-list-field sonata-ba-list-field-text" >
+    <strong>Imagen</strong>  
+</td>
+<td class="sonata-ba-list-field sonata-ba-list-field-text" objectid="{{object.id}}">
+    {%if(object.getFoto)%}
+        <img src="{{asset('uploads/eventos/'~object.getFoto)}}" alt="" width="100px"/>
+    {%endif%}
+</td>
+

@@ -1,0 +1,6 @@
+ItoSoftware\Base\ModelBundle\Entity\Hotel:
+    properties:
+        nombre:
+            - NotBlank: ~
+        web:
+            - Url: ~

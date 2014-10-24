@@ -1,0 +1,9 @@
+<div class="row-fluid">
+     <div class="col-lg-5">
+         <td><strong>Fecha Actualización</strong></td>
+<td class="table-condensed" objectid="{{object.id}}">
+    {%if(object.getUpdatedAt)%}
+        {{object.getUpdatedAt|localizeddate('none', 'none', 'es', null, " dd  'de'  MMMM Y  hh:mm aaa")}}  
+    {%endif%}
+</td>
+</div></div>

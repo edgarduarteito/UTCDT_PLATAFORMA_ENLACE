@@ -1,0 +1,395 @@
+<?php
+
+namespace ItoSoftware\Base\ModelBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use SamJ\DoctrineSluggableBundle\SluggableInterface;
+use Utilities\ApplicationBoot;
+
+/**
+ * CategoriaDanza
+ */
+class CategoriaDanza implements SluggableInterface {
+    
+    
+//    ******************************************************************************************
+//    ****ADICIONES
+//    ******************************************************************************************
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function setCreatedAtValue() {
+        $this->activo = true;
+        $this->created_at = new \DateTime();
+        $this->updated_at = new \DateTime();
+    }
+
+    /**
+     * @ORM\PreUpdate
+     */
+    public function setUpdatedAtValue() {
+        $this->updated_at = new \DateTime();
+    }
+    
+    public function __toString() {
+        return $this->getNombre();
+    }
+
+    public function setSlug($slug) {
+        if (!empty($this->slug))
+            return false;
+        $this->slug = $slug;
+    }
+
+    public function getSlugFields() {
+        return $this->getNombre();
+    }
+//    ******************************************************************************************
+//    ****MODIFICACIONES
+//    ******************************************************************************************    
+
+    /**
+     * @var string
+     */
+    private $descripcion;
+
+    /**
+     * @var \DateTime
+     */
+    private $created_at;
+
+    /**
+     * @var \DateTime
+     */
+    private $updated_at;
+
+    /**
+     * @var integer
+     */
+    private $id;
+
+    /**
+     * @var \ItoSoftware\Base\ModelBundle\Entity\Danza
+     */
+    private $danza;
+
+    /**
+     * @var \ItoSoftware\Base\ModelBundle\Entity\Ritmo
+     */
+    private $ritmo;
+
+
+    /**
+     * Set descripcion
+     *
+     * @param string $descripcion
+     * @return CategoriaDanza
+     */
+    public function setDescripcion($descripcion)
+    {
+        $this->descripcion = $descripcion;
+
+        return $this;
+    }
+
+    /**
+     * Get descripcion
+     *
+     * @return string 
+     */
+    public function getDescripcion()
+    {
+        return $this->descripcion;
+    }
+
+    /**
+     * Set created_at
+     *
+     * @param \DateTime $createdAt
+     * @return CategoriaDanza
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->created_at = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get created_at
+     *
+     * @return \DateTime 
+     */
+    public function getCreatedAt()
+    {
+        return $this->created_at;
+    }
+
+    /**
+     * Set updated_at
+     *
+     * @param \DateTime $updatedAt
+     * @return CategoriaDanza
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updated_at = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get updated_at
+     *
+     * @return \DateTime 
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updated_at;
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set danza
+     *
+     * @param \ItoSoftware\Base\ModelBundle\Entity\Danza $danza
+     * @return CategoriaDanza
+     */
+    public function setDanza(\ItoSoftware\Base\ModelBundle\Entity\Danza $danza = null)
+    {
+        $this->danza = $danza;
+
+        return $this;
+    }
+
+    /**
+     * Get danza
+     *
+     * @return \ItoSoftware\Base\ModelBundle\Entity\Danza 
+     */
+    public function getDanza()
+    {
+        return $this->danza;
+    }
+
+    /**
+     * Set ritmo
+     *
+     * @param \ItoSoftware\Base\ModelBundle\Entity\Ritmo $ritmo
+     * @return CategoriaDanza
+     */
+    public function setRitmo(\ItoSoftware\Base\ModelBundle\Entity\Ritmo $ritmo = null)
+    {
+        $this->ritmo = $ritmo;
+
+        return $this;
+    }
+
+    /**
+     * Get ritmo
+     *
+     * @return \ItoSoftware\Base\ModelBundle\Entity\Ritmo 
+     */
+    public function getRitmo()
+    {
+        return $this->ritmo;
+    }
+    /**
+     * @var string
+     */
+    private $nombre;
+
+
+    /**
+     * Set nombre
+     *
+     * @param string $nombre
+     * @return CategoriaDanza
+     */
+    public function setNombre($nombre)
+    {
+        $this->nombre = $nombre;
+
+        return $this;
+    }
+
+    /**
+     * Get nombre
+     *
+     * @return string 
+     */
+    public function getNombre()
+    {
+        return $this->nombre;
+    }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $organizacion_danzaria;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->organizacion_danzaria = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add organizacion_danzaria
+     *
+     * @param \ItoSoftware\Base\ModelBundle\Entity\OrganizacionDanzaria $organizacionDanzaria
+     * @return CategoriaDanza
+     */
+    public function addOrganizacionDanzarium(\ItoSoftware\Base\ModelBundle\Entity\OrganizacionDanzaria $organizacionDanzaria)
+    {
+        $this->organizacion_danzaria[] = $organizacionDanzaria;
+
+        return $this;
+    }
+
+    /**
+     * Remove organizacion_danzaria
+     *
+     * @param \ItoSoftware\Base\ModelBundle\Entity\OrganizacionDanzaria $organizacionDanzaria
+     */
+    public function removeOrganizacionDanzarium(\ItoSoftware\Base\ModelBundle\Entity\OrganizacionDanzaria $organizacionDanzaria)
+    {
+        $this->organizacion_danzaria->removeElement($organizacionDanzaria);
+    }
+
+    /**
+     * Get organizacion_danzaria
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getOrganizacionDanzaria()
+    {
+        return $this->organizacion_danzaria;
+    }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $evento;
+
+
+    /**
+     * Add evento
+     *
+     * @param \ItoSoftware\Base\ModelBundle\Entity\Evento $evento
+     * @return CategoriaDanza
+     */
+    public function addEvento(\ItoSoftware\Base\ModelBundle\Entity\Evento $evento)
+    {
+        $this->evento[] = $evento;
+
+        return $this;
+    }
+
+    /**
+     * Remove evento
+     *
+     * @param \ItoSoftware\Base\ModelBundle\Entity\Evento $evento
+     */
+    public function removeEvento(\ItoSoftware\Base\ModelBundle\Entity\Evento $evento)
+    {
+        $this->evento->removeElement($evento);
+    }
+
+    /**
+     * Get evento
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getEvento()
+    {
+        return $this->evento;
+    }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $libro;
+
+
+    /**
+     * Add libro
+     *
+     * @param \ItoSoftware\Base\ModelBundle\Entity\Libro $libro
+     * @return CategoriaDanza
+     */
+    public function addLibro(\ItoSoftware\Base\ModelBundle\Entity\Libro $libro)
+    {
+        $this->libro[] = $libro;
+
+        return $this;
+    }
+
+    /**
+     * Remove libro
+     *
+     * @param \ItoSoftware\Base\ModelBundle\Entity\Libro $libro
+     */
+    public function removeLibro(\ItoSoftware\Base\ModelBundle\Entity\Libro $libro)
+    {
+        $this->libro->removeElement($libro);
+    }
+
+    /**
+     * Get libro
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getLibro()
+    {
+        return $this->libro;
+    }
+    /**
+     * @var string
+     */
+    private $slug;
+
+
+    /**
+     * Get slug
+     *
+     * @return string 
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * Add danza
+     *
+     * @param \ItoSoftware\Base\ModelBundle\Entity\Danza $danza
+     * @return CategoriaDanza
+     */
+    public function addDanza(\ItoSoftware\Base\ModelBundle\Entity\Danza $danza)
+    {
+        $this->danza[] = $danza;
+
+        return $this;
+    }
+
+    /**
+     * Remove danza
+     *
+     * @param \ItoSoftware\Base\ModelBundle\Entity\Danza $danza
+     */
+    public function removeDanza(\ItoSoftware\Base\ModelBundle\Entity\Danza $danza)
+    {
+        $this->danza->removeElement($danza);
+    }
+}

@@ -1,0 +1,51 @@
+{% extends '::aula.html.twig' %}
+{% block title %}{{project_name}}{% endblock %}
+ 
+{% block body %} 
+    <div class="contenedor">
+            	                <div class="row">
+                	<section class="col-lg-8">
+                    	<h1>Eventos</h1>
+                        
+                    	<div class="row aulas">
+                            {%for evento in pagination%}
+                        	<article class="col-md-6">
+                                    {%set contador=0%}
+                    {%set foto=null%}
+                    {%for imagen in evento.getEventoFotos%}
+                        {%set contador = contador+1%}
+                    {%endfor%}
+                    {%if contador>0%}
+                        {%set foto= random(evento.getEventoFotos)%}
+                    {%endif%}
+                     {%if foto!=""%}
+                            <img src="http://{{app.request.host ~ foto.viewImage}}" alt="img-evento"/> 
+                        {%else%}
+                            <img src="http://{{app.request.host}}/bundles/webappfrontend/images/no-hay-foto.png" alt="img-evento">
+
+                        {%endif%}
+                            	
+                                <h4>{{evento.titulo|truncate(70)}}</h4>
+                                <p class="lead">{{evento.descripcionCorta|truncate(100)|raw}}</p>
+                                <a href="{{path('web_app_frontend_detalle_evento', {'slug': evento.slug})}}">Leer más</a>
+                            </article>
+                        {%endfor%}
+                            
+                           
+                        </div>
+                         <div class="btn-toolbar" role="toolbar">
+                                <div class="count">
+                    Total resultados: {{ pagination.getTotalItemCount }}
+                </div>
+                              <div class="btn-group">
+                              	{{ knp_pagination_render(pagination) }}
+                              </div>         
+                            </div>
+                    </section>
+                    <section class="col-lg-4">
+                    	
+                                             
+                    </section>
+                </div>
+            </div>
+{% endblock %}

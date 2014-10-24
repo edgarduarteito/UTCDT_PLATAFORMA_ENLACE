@@ -1,0 +1,73 @@
+sonata_block:
+    default_contexts: [symfony_web_app]
+    blocks:
+        sonata.admin.block.admin_list:
+            contexts: [admin]
+        sonata.block.service.text: ~
+        sonata.block.service.action: ~
+        sonata.block.service.rss: ~
+sonata_user:
+    profile:
+        # Profile show page is a dashboard as in SonataAdminBundle
+        dashboard:
+            blocks:
+                - { position: left, type: sonata.block.service.text, settings: { content: "<h2>Welcome!</h2> This is a sample user profile dashboard, feel free to override it in the configuration! Want to make this text dynamic? For instance display the user's name? Create a dedicated block and edit the configuration!"} }
+                - { position: left, type: sonata.order.block.recent_orders, settings: { title: Recent Orders, number: 5, mode: public }}
+                - { position: right, type: sonata.timeline.block.timeline, settings: { max_per_page: 15 }}
+                - { position: right, type: sonata.news.block.recent_posts, settings: { title: Recent Posts, number: 5, mode: public }}
+                - { position: right, type: sonata.news.block.recent_comments, settings: { title: Recent Comments, number: 5, mode: public }}
+        # Customize user portal menu by setting links
+        menu:
+            - { route: 'sonata_user_profile_show', label: 'sonata_profile_title', domain: 'SonataUserBundle'}
+            - { route: 'sonata_user_profile_edit', label: 'link_edit_profile', domain: 'SonataUserBundle'}
+            - { route: 'sonata_customer_addresses', label: 'link_list_addresses', domain: 'SonataCustomerBundle'}
+            - { route: 'sonata_user_profile_edit_authentication', label: 'link_edit_authentication', domain: 'SonataUserBundle'}
+            - { route: 'sonata_order_index', label: 'order_list', domain: 'SonataOrderBundle'}
+
+
+
+sonata_admin:
+    title: 'Plataforma Enlace'
+    title_logo: /bundles/itoadmin/images/logoto.jpg
+    templates:
+        # default global templates
+        layout:    ItoAdminBundle:Sonata:standard_layout.html.twig
+        ajax:      SonataAdminBundle::ajax_layout.html.twig
+        list_block: WebAppAdminBundle:Sonata:Block/block_admin_list.html.twig
+
+        # default values of actions templates, they should extend global templates
+        list:    SonataAdminBundle:CRUD:list.html.twig
+        show:    ItoAdminBundle:CRUD:show.html.twig
+        edit:    SonataAdminBundle:CRUD:edit.html.twig
+        history: SonataAdminBundle:CRUD:history.html.twig
+        preview: SonataAdminBundle:CRUD:preview.html.twig
+        # default values of helper templates
+        short_object_description: SonataAdminBundle:Helper:short-object-description.html
+    
+    dashboard:
+        groups:
+            Contenido:
+                roles: [ ROLE_SUPER_ADMIN ]
+            User:
+                roles: [ ROLE_SUPER_ADMIN ]
+                label: Usuarios
+            Evento:
+                roles: [ ROLE_SUPER_ADMIN ] 
+            Aula:
+                roles: [ ROLE_SUPER_ADMIN ]     
+        blocks:
+            - { position: left,  type: sonata.admin.block.admin_list, settings: { groups: [User, Contenido,Evento,Aula] } }
+
+sonata_user:
+
+    admin:                  # Admin Classes
+        user:
+            class:          Sonata\UserBundle\Admin\Entity\UserAdmin
+            controller:     SonataAdminBundle:CRUD
+            translation:    ItoAdminBundle
+
+        group:
+            class:          Sonata\UserBundle\Admin\Entity\GroupAdmin
+            controller:     SonataAdminBundle:CRUD
+            translation:    ItoAdminBundle
+    

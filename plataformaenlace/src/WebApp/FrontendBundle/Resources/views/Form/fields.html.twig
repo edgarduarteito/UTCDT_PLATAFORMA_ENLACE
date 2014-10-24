@@ -1,0 +1,24 @@
+{% extends 'form_div_layout.html.twig' %}
+{% block preview_widget %}
+    {%if value%}
+        {% if file_exists(web_path ~ '/uploads/documents' ~ '/'~value) %}
+            <a href="http://{{app.request.host}}/uploads/documents/{{value}}"/> Descargar </a> 
+        {% else %}
+
+    {% endif %}
+{% else %}
+
+{% endif %}
+{% endblock %}
+
+{% block view_image_widget %}
+    {%if value%}
+        {% if file_exists(web_path ~ value) %}
+            <img src="http://{{app.request.host ~ value}}" style="max-height: 600px;width: 270px;"/> 
+        {% else %}
+            <img src="http://{{app.request.host}}/bundles/webappfrontend/images/no-hay-foto.png" style="max-height: 600px;width: 270px;">
+        {% endif %}
+    {% else %}
+        <img src="http://{{app.request.host}}/bundles/webappfrontend/images/no-hay-foto.png" style="max-height: 600px;width: 270px;">
+    {% endif %}
+{% endblock %}

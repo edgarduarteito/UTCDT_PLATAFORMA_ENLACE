@@ -1,0 +1,40 @@
+.slider{
+	width:100%;
+	position:relative;
+	margin:0 auto;
+	padding: 0;
+	overflow:hidden;
+}
+.left, .right{
+	position:absolute;
+	top: 50%;
+	line-height: normal;
+	font-size: 3em;
+	height: 60px;
+	width: 60px;
+	border:none;
+	margin: 0 30px;
+	color:#FFF;
+	background-color:#099;
+	border-radius:100px;
+	}
+.left{
+	left:0px;
+	}
+.right{
+	right:0px;
+	}
+.slider .slider_container{
+	white-space:nowrap;
+	height: 100%;
+}
+.slider .slider_container .rotador{
+	display:inline-block;
+	margin: 0;
+	padding: 0;
+	vertical-align:top;
+	background-size: auto 100%;
+	background-repeat:no-repeat;
+	background-position:50%;
+}
+

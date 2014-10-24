@@ -1,0 +1,182 @@
+<?php
+
+namespace ItoSoftware\Base\ModelBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * DanzaRitmo
+ */
+class DanzaRitmo
+{
+    /**
+     * @var string
+     */
+    private $descripcion;
+
+    /**
+     * @var \DateTime
+     */
+    private $created_at;
+
+    /**
+     * @var \DateTime
+     */
+    private $updated_at;
+
+    /**
+     * @var integer
+     */
+    private $id;
+
+    /**
+     * @var \ItoSoftware\Base\ModelBundle\Entity\Danza
+     */
+    private $danza;
+
+    /**
+     * @var \ItoSoftware\Base\ModelBundle\Entity\Ritmo
+     */
+    private $ritmo;
+
+
+    /**
+     * Set descripcion
+     *
+     * @param string $descripcion
+     * @return DanzaRitmo
+     */
+    public function setDescripcion($descripcion)
+    {
+        $this->descripcion = $descripcion;
+
+        return $this;
+    }
+
+    /**
+     * Get descripcion
+     *
+     * @return string 
+     */
+    public function getDescripcion()
+    {
+        return $this->descripcion;
+    }
+
+    /**
+     * Set created_at
+     *
+     * @param \DateTime $createdAt
+     * @return DanzaRitmo
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->created_at = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get created_at
+     *
+     * @return \DateTime 
+     */
+    public function getCreatedAt()
+    {
+        return $this->created_at;
+    }
+
+    /**
+     * Set updated_at
+     *
+     * @param \DateTime $updatedAt
+     * @return DanzaRitmo
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updated_at = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get updated_at
+     *
+     * @return \DateTime 
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updated_at;
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set danza
+     *
+     * @param \ItoSoftware\Base\ModelBundle\Entity\Danza $danza
+     * @return DanzaRitmo
+     */
+    public function setDanza(\ItoSoftware\Base\ModelBundle\Entity\Danza $danza = null)
+    {
+        $this->danza = $danza;
+
+        return $this;
+    }
+
+    /**
+     * Get danza
+     *
+     * @return \ItoSoftware\Base\ModelBundle\Entity\Danza 
+     */
+    public function getDanza()
+    {
+        return $this->danza;
+    }
+
+    /**
+     * Set ritmo
+     *
+     * @param \ItoSoftware\Base\ModelBundle\Entity\Ritmo $ritmo
+     * @return DanzaRitmo
+     */
+    public function setRitmo(\ItoSoftware\Base\ModelBundle\Entity\Ritmo $ritmo = null)
+    {
+        $this->ritmo = $ritmo;
+
+        return $this;
+    }
+
+    /**
+     * Get ritmo
+     *
+     * @return \ItoSoftware\Base\ModelBundle\Entity\Ritmo 
+     */
+    public function getRitmo()
+    {
+        return $this->ritmo;
+    }
+    /**
+     * @ORM\PrePersist
+     */
+    public function setCreatedAtValue()
+    {
+        // Add your code here
+    }
+
+    /**
+     * @ORM\PreUpdate
+     */
+    public function setUpdatedAtValue()
+    {
+        // Add your code here
+    }
+}

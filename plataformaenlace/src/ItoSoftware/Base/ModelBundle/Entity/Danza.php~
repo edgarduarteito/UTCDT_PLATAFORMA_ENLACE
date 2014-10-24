@@ -1,0 +1,384 @@
+<?php
+
+namespace ItoSoftware\Base\ModelBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use SamJ\DoctrineSluggableBundle\SluggableInterface;
+use Utilities\ApplicationBoot;
+/**
+ * Danza
+ */
+class Danza implements SluggableInterface {
+    
+//    ******************************************************************************************
+//    ****ADICIONES
+//    ******************************************************************************************
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function setCreatedAtValue() {
+        $this->activo = true;
+        $this->created_at = new \DateTime();
+        $this->updated_at = new \DateTime();
+    }
+
+    /**
+     * @ORM\PreUpdate
+     */
+    public function setUpdatedAtValue() {
+        $this->updated_at = new \DateTime();
+    }
+    
+    public function __toString() {
+        return $this->getNombre();
+    }
+
+    public function setSlug($slug) {
+        if (!empty($this->slug))
+            return false;
+        $this->slug = $slug;
+    }
+
+    public function getSlugFields() {
+        return $this->getNombre();
+    }
+
+//    ******************************************************************************************
+//    ****MODIFICACIONES
+//    ******************************************************************************************    
+
+    /**
+     * @var string
+     */
+    private $nombre;
+
+    /**
+     * @var string
+     */
+    private $descripcion;
+
+    /**
+     * @var \DateTime
+     */
+    private $created_at;
+
+    /**
+     * @var \DateTime
+     */
+    private $updated_at;
+
+    /**
+     * @var integer
+     */
+    private $id;
+    /**
+     * @var string
+     */
+    private $slug;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $municipio_danza;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $danza_foto;
+
+    /**
+     * @var \ItoSoftware\Base\ModelBundle\Entity\CategoriaDanza
+     */
+    private $categoria_danza;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $ritmos;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $coreografos;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->municipio_danza = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->danza_foto = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->ritmos = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->coreografos = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Set nombre
+     *
+     * @param string $nombre
+     * @return Danza
+     */
+    public function setNombre($nombre)
+    {
+        $this->nombre = $nombre;
+
+        return $this;
+    }
+
+    /**
+     * Get nombre
+     *
+     * @return string 
+     */
+    public function getNombre()
+    {
+        return $this->nombre;
+    }
+
+    /**
+     * Set descripcion
+     *
+     * @param string $descripcion
+     * @return Danza
+     */
+    public function setDescripcion($descripcion)
+    {
+        $this->descripcion = $descripcion;
+
+        return $this;
+    }
+
+    /**
+     * Get descripcion
+     *
+     * @return string 
+     */
+    public function getDescripcion()
+    {
+        return $this->descripcion;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string 
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * Set created_at
+     *
+     * @param \DateTime $createdAt
+     * @return Danza
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->created_at = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get created_at
+     *
+     * @return \DateTime 
+     */
+    public function getCreatedAt()
+    {
+        return $this->created_at;
+    }
+
+    /**
+     * Set updated_at
+     *
+     * @param \DateTime $updatedAt
+     * @return Danza
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updated_at = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get updated_at
+     *
+     * @return \DateTime 
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updated_at;
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Add municipio_danza
+     *
+     * @param \ItoSoftware\Base\ModelBundle\Entity\MunicipioDanza $municipioDanza
+     * @return Danza
+     */
+    public function addMunicipioDanza(\ItoSoftware\Base\ModelBundle\Entity\MunicipioDanza $municipioDanza)
+    {
+        $this->municipio_danza[] = $municipioDanza;
+
+        return $this;
+    }
+
+    /**
+     * Remove municipio_danza
+     *
+     * @param \ItoSoftware\Base\ModelBundle\Entity\MunicipioDanza $municipioDanza
+     */
+    public function removeMunicipioDanza(\ItoSoftware\Base\ModelBundle\Entity\MunicipioDanza $municipioDanza)
+    {
+        $this->municipio_danza->removeElement($municipioDanza);
+    }
+
+    /**
+     * Get municipio_danza
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getMunicipioDanza()
+    {
+        return $this->municipio_danza;
+    }
+
+    /**
+     * Add danza_foto
+     *
+     * @param \ItoSoftware\Base\ModelBundle\Entity\DanzaFoto $danzaFoto
+     * @return Danza
+     */
+    public function addDanzaFoto(\ItoSoftware\Base\ModelBundle\Entity\DanzaFoto $danzaFoto)
+    {
+        $this->danza_foto[] = $danzaFoto;
+
+        return $this;
+    }
+
+    /**
+     * Remove danza_foto
+     *
+     * @param \ItoSoftware\Base\ModelBundle\Entity\DanzaFoto $danzaFoto
+     */
+    public function removeDanzaFoto(\ItoSoftware\Base\ModelBundle\Entity\DanzaFoto $danzaFoto)
+    {
+        $this->danza_foto->removeElement($danzaFoto);
+    }
+
+    /**
+     * Get danza_foto
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getDanzaFoto()
+    {
+        return $this->danza_foto;
+    }
+
+    /**
+     * Set categoria_danza
+     *
+     * @param \ItoSoftware\Base\ModelBundle\Entity\CategoriaDanza $categoriaDanza
+     * @return Danza
+     */
+    public function setCategoriaDanza(\ItoSoftware\Base\ModelBundle\Entity\CategoriaDanza $categoriaDanza = null)
+    {
+        $this->categoria_danza = $categoriaDanza;
+
+        return $this;
+    }
+
+    /**
+     * Get categoria_danza
+     *
+     * @return \ItoSoftware\Base\ModelBundle\Entity\CategoriaDanza 
+     */
+    public function getCategoriaDanza()
+    {
+        return $this->categoria_danza;
+    }
+
+    /**
+     * Add ritmos
+     *
+     * @param \ItoSoftware\Base\ModelBundle\Entity\Ritmo $ritmos
+     * @return Danza
+     */
+    public function addRitmo(\ItoSoftware\Base\ModelBundle\Entity\Ritmo $ritmos)
+    {
+        $this->ritmos[] = $ritmos;
+
+        return $this;
+    }
+
+    /**
+     * Remove ritmos
+     *
+     * @param \ItoSoftware\Base\ModelBundle\Entity\Ritmo $ritmos
+     */
+    public function removeRitmo(\ItoSoftware\Base\ModelBundle\Entity\Ritmo $ritmos)
+    {
+        $this->ritmos->removeElement($ritmos);
+    }
+
+    /**
+     * Get ritmos
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getRitmos()
+    {
+        return $this->ritmos;
+    }
+
+    /**
+     * Add coreografos
+     *
+     * @param \ItoSoftware\Base\ModelBundle\Entity\Coreografo $coreografos
+     * @return Danza
+     */
+    public function addCoreografo(\ItoSoftware\Base\ModelBundle\Entity\Coreografo $coreografos)
+    {
+        $this->coreografos[] = $coreografos;
+
+        return $this;
+    }
+
+    /**
+     * Remove coreografos
+     *
+     * @param \ItoSoftware\Base\ModelBundle\Entity\Coreografo $coreografos
+     */
+    public function removeCoreografo(\ItoSoftware\Base\ModelBundle\Entity\Coreografo $coreografos)
+    {
+        $this->coreografos->removeElement($coreografos);
+    }
+
+    /**
+     * Get coreografos
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getCoreografos()
+    {
+        return $this->coreografos;
+    }
+}

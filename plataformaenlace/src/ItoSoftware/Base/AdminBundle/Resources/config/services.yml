@@ -1,0 +1,98 @@
+parameters:
+#    ito_admin.example.class: ItoSoftware\Base\AdminBundle\Example
+
+services:
+#    ito_admin.example:
+#        class: %ito_admin.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
+
+    sonata.user.admin.user:
+       class: ItoSoftware\Base\AdminBundle\Admin\ItoUserAdmin
+       tags:
+           - { name: sonata.admin, manager_type: orm, group: '%sonata.user.admin.groupname%', label: 'usuarios',   label_translator_strategy: 'sonata.admin.label.strategy.underscore' }
+       arguments:
+           - null
+           - %sonata.user.admin.user.entity%
+           - %sonata.user.admin.user.controller%
+       calls:
+            - [setUserManager, ["@fos_user.user_manager"]]
+            - [setTranslationDomain, [%sonata_user.admin.user.translation%, ItoAdminBundle]]
+            - [setContainer, ["@service_container"]]
+
+#    ito_admin.admin.hotel:
+#        class: ItoSoftware\Base\AdminBundle\Admin\HotelAdmin
+#        arguments: [~, ItoSoftware\Base\ModelBundle\Entity\Hotel, ItoAdminBundle:HotelAdmin]
+#        tags:
+#            - {name: sonata.admin, manager_type: orm, group: Contenido, label: Hotel}
+#
+#    ito_admin.admin.hotel_foto:
+#        class: ItoSoftware\Base\AdminBundle\Admin\HotelFotoAdmin
+#        arguments: [~, ItoSoftware\Base\ModelBundle\Entity\HotelFoto, SonataAdminBundle:CRUD]
+#        tags:
+#            - {name: sonata.admin, manager_type: orm, group: Contenido, label: HotelFoto}
+
+    ito_admin.admin.municipio:
+        class: ItoSoftware\Base\AdminBundle\Admin\MunicipioAdmin
+        arguments: [~, ItoSoftware\Base\ModelBundle\Entity\Municipio, ItoAdminBundle:MunicipioAdmin]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Contenido, label: Municipio}
+
+#    ito_admin.admin.comentario_hotel:
+#        class: ItoSoftware\Base\AdminBundle\Admin\ComentarioHotelAdmin
+#        arguments: [~, ItoSoftware\Base\ModelBundle\Entity\ComentarioHotel, ItoAdminBundle:ComentarioHotelAdmin]
+#        tags:
+#            - {name: sonata.admin, manager_type: orm, group: Contenido, label: ComentarioHotel}
+
+    ito_admin.admin.visitas:
+        class: ItoSoftware\Base\AdminBundle\Admin\VisitasAdmin
+        arguments: [~, ItoSoftware\Base\ModelBundle\Entity\Visitas, ItoAdminBundle:VisitasAdmin]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Contenido, label: Visitas}
+
+    ito_admin.admin.evento:
+        class: ItoSoftware\Base\AdminBundle\Admin\EventoAdmin
+        arguments: [~, ItoSoftware\Base\ModelBundle\Entity\Evento, ItoAdminBundle:EventoAdmin]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Evento, label: Evento}
+
+    ito_admin.admin.evento_foto:
+        class: ItoSoftware\Base\AdminBundle\Admin\EventoFotoAdmin
+        arguments: [~, ItoSoftware\Base\ModelBundle\Entity\EventoFoto, ItoAdminBundle:EventoFotoAdmin]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Evento, label: Imagenes de Eventos}
+
+    ito_admin.admin.comentario_evento:
+        class: ItoSoftware\Base\AdminBundle\Admin\ComentarioEventoAdmin
+        arguments: [~, ItoSoftware\Base\ModelBundle\Entity\ComentarioEvento, ItoAdminBundle:ComentarioEventoAdmin]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Evento, label: Eventos comentados}
+
+    ito_admin.admin.aula_musical:
+        class: ItoSoftware\Base\AdminBundle\Admin\AulaMusicalAdmin
+        arguments: [~, ItoSoftware\Base\ModelBundle\Entity\AulaMusical, ItoAdminBundle:AulaMusicalAdmin]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Aula, label: Aula Musical}
+
+    ito_admin.admin.aula_foto:
+        class: ItoSoftware\Base\AdminBundle\Admin\AulaFotoAdmin
+        arguments: [~, ItoSoftware\Base\ModelBundle\Entity\AulaFoto, ItoAdminBundle:AulaFotoAdmin]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Aula, label: Imagenes de aulas}
+
+    ito_admin.admin.comentario_aula:
+        class: ItoSoftware\Base\AdminBundle\Admin\ComentarioAulaAdmin
+        arguments: [~, ItoSoftware\Base\ModelBundle\Entity\ComentarioAula, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Aula, label: Comentario de aulas}
+
+    ito_admin.admin.contacto:
+        class: ItoSoftware\Base\AdminBundle\Admin\ContactoAdmin
+        arguments: [~, ItoSoftware\Base\ModelBundle\Entity\Contacto, ItoAdminBundle:ContactoAdmin]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Contenido, label: Contacto}
+
+    ito_admin.admin.foto_slide:
+        class: ItoSoftware\Base\AdminBundle\Admin\FotoSlideAdmin
+        arguments: [~, ItoSoftware\Base\ModelBundle\Entity\FotoSlide, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Contenido, label: Imagenes del Slide}

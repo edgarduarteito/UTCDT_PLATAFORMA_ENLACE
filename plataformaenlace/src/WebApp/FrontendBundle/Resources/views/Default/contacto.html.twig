@@ -1,0 +1,76 @@
+{% extends '::eventodetalletwig.html.twig' %}
+{% block title %}{% endblock %}
+{% block body %} 
+
+    <section class="row">
+
+        <section class="col-md-12 aplicaciones">
+
+            <div class="box_text_detalle">
+                <br>
+
+                <h2>Contáctenos</h2>
+                <div class="box_blanco">
+                    <script type="text/javascript" language="javascript">
+                        
+$(document).ready(function(){
+  $("form").submit(function() {
+    var x = $("#contacto_email").val();
+      if (x!="") {
+        alert("requerido campo email");		
+        return false;
+      } else 
+          return true;			
+    });
+});
+}
+</script>
+
+                    <div class="box_formulario">
+                        <form action="{{ path('web_app_frontend_contacto') }}" {{ form_enctype(contacto) }} method="POST" class="col-md-6 sesion" >
+                        <label for="username" class="col-sm-4 control-label">Correo Electr&oacute;nico</label>
+                        {%if form_errors(contacto.email)  is not empty %}
+                            <div class="bg-danger errores">{{ form_errors(contacto.email) }}</div>
+                        {% endif %}
+                        {{ form_widget(contacto.email) }}
+
+                        <label for="username" class="col-sm-4 control-label">Asunto</label>
+                        {%if form_errors(contacto.asunto)  is not empty %}
+                            <div class="bg-danger errores">{{ form_errors(contacto.asunto) }}</div>
+                        {% endif %}
+                        {{ form_widget(contacto.asunto) }}     
+                        <label for="username" class="col-sm-4 control-label">Comentario</label>
+                        {%if form_errors(contacto.mensaje)  is not empty %}
+                            <div class="bg-danger errores">{{ form_errors(contacto.mensaje) }}</div>
+                        {% endif %}
+                        {{ form_widget(contacto.mensaje) }}
+                        <div>
+                            <button type="submit" class="btn btn btn-success">Enviar</button>
+                        </div>
+
+                      
+                        {{form_rest(contacto)}}
+                        </form>
+                    </div>
+                </div>
+                        
+                    <div class="col-md-6">
+                        {% for flashMessage in app.session.flashbag.get('sucess') %}
+              
+                <div class="alert alert-success" role="alert"> <button type="button" class="close" data-dismiss="alert">&times;</button>{{ flashMessage }}</div>
+
+            {% endfor %} 
+                        
+                    </div>
+                    
+            </div>
+            
+
+
+       
+        </section>
+    </section>
+
+
+
+{% endblock %}

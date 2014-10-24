@@ -1,0 +1,108 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="1">
+                <source>Hello</source>
+                <target>Hola</target>
+            </trans-unit>
+            <trans-unit id="2">
+                <source>World</source>
+                <target>Mundo</target>
+            </trans-unit>
+            <trans-unit id="3">
+                <source>Dear User</source>
+                <target>EStimado usuario</target>
+            </trans-unit>
+            <trans-unit id="4">
+                <source>A new account has been created for you in the website</source>
+                <target>Una nueva cuenta ha sido creada para usted en el portal web</target>
+            </trans-unit>
+            <trans-unit id="5">
+                <source>You can use the information listed bellow to access into your new account</source>
+                <target>Usted puede usar la informacion listada a continuacion para acceder a su nueva cuenta</target>
+            </trans-unit>
+            <trans-unit id="6">
+                <source>Access</source>
+                <target>Mundo</target>
+            </trans-unit>
+            <trans-unit id="7">
+                <source>Username</source>
+                <target>Mundo</target>
+            </trans-unit>
+            <trans-unit id="8">
+                <source>Password</source>
+                <target>Mundo</target>
+            </trans-unit>
+            <trans-unit id="9">
+                <source>List</source>
+                <target>Lista</target>
+            </trans-unit>
+            <trans-unit id="10">
+                <source>Add new</source>
+                <target>Nuevo</target>
+            </trans-unit>
+            <trans-unit id="11">
+                <source>Edit</source>
+                <target>Editar</target>
+            </trans-unit>
+            <trans-unit id="12">
+                <source>User</source>
+                <target>Usuarios</target>
+            </trans-unit>
+            <trans-unit id="13">
+                <source>user</source>
+                <target>Usuarios</target>
+            </trans-unit>
+            <trans-unit id="14">
+                <source>Municipio List</source>
+                <target>Lista de Municipios</target>
+            </trans-unit>
+            <trans-unit id="15">
+                <source>Visitas List</source>
+                <target>Visitas</target>
+            </trans-unit>
+            <trans-unit id="16">
+                <source>Contacto List</source>
+                <target>Lista de contactos</target>
+            </trans-unit>
+            <trans-unit id="17">
+                <source>Evento List</source>
+                <target>Listado de Eventos</target>
+            </trans-unit>
+            <trans-unit id="18">
+                <source>Evento Foto List</source>
+                <target>Listado de fotos para eventos</target>
+            </trans-unit>
+            <trans-unit id="19">
+                <source>Comentario Evento List</source>
+                <target>Listado de comentarios para eventos</target>
+            </trans-unit>
+            <trans-unit id="20">
+                <source>Aula Musical List</source>
+                <target>Lista de aulas musicales</target>
+            </trans-unit>
+            <trans-unit id="21">
+                <source>Aula Foto List</source>
+                <target>Listado de fotos para Aulas</target>
+            </trans-unit>
+            <trans-unit id="22">
+                <source>Comentario Aula List</source>
+                <target>Listado de comentarios de aulas musicales</target>
+            </trans-unit>
+            <trans-unit id="23">
+                <source>Foto Slide List</source>
+                <target>Listado de Imagenes del Slide</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>
+
+
+
+
+
+
+
+
+

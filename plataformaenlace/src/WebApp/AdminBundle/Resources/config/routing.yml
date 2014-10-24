@@ -1,0 +1,4 @@
+web_app_admin_homepage:
+    pattern:  /
+    defaults: { _controller: WebAppAdminBundle:Default:index }
+

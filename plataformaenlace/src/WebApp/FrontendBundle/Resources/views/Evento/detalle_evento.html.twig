@@ -1,0 +1,131 @@
+{% extends '::frontendEvento.html.twig' %}
+{% block title %}Detalle Eventos{% endblock %}
+{% block custom_javascripts %}
+    <script src='{{ asset('bundles/webappfrontend/js/jquery.MetaData.js') }}' type="text/javascript" language="javascript"></script>
+    <script src='{{ asset('bundles/webappfrontend/js/jquery.rating.js') }}' type="text/javascript" language="javascript"></script>
+    <link href='{{ asset('bundles/webappfrontend/js/jquery.rating.css') }}' type="text/css" rel="stylesheet"/>
+
+    {{ form_javascript(comentario) }}{% endblock  %}
+    {% block body %}
+        <div class="contenedor">
+            <section class="row">
+                <div class="col-md-12">
+                    <div class="migas-de-pan">
+                        <p>Inicio /</p>
+                        <p>detalle</p>
+                    </div>
+                </div>
+                <div class="col-md-7 detalle">
+                    <div class="facebook">
+                        <div id="fb-root"></div>
+                        <script>(function(d, s, id) {
+                                var js, fjs = d.getElementsByTagName(s)[0];
+                                if (d.getElementById(id))
+                                    return;
+                                js = d.createElement(s);
+                                js.id = id;
+                                js.src = "//connect.facebook.net/es_ES/all.js#xfbml=1&version=v2.0";
+                                fjs.parentNode.insertBefore(js, fjs);
+                            }(document, 'script', 'facebook-jssdk'));</script>
+                        <div class="fb-share-button" data-href="{{path(app.request.attributes.get('_route'),{'slug':evento.slug})}}" data-type="button_count"></div>
+                    </div>     
+                    <h3>{{evento.titulo}}</h3>
+                    <time>{{evento.fecha|localizeddate('none', 'none', 'es', null, " dd  'de'  MMMM Y ") }}</time>
+                    <div class="slider">
+                        <div class="slider_container">
+                            {% if evento.getEventoFotos.values%}
+                                {%for foto in evento.getEventoFotos%}
+                                    <div class="rotador" data-background="http://{{app.request.host ~ foto.viewImage}}"></div>
+                                {%endfor%}
+
+
+                            {%else%}
+                                <div class="rotador" data-background="http://{{app.request.host}}/bundles/webappfrontend/images/no-hay-foto.png  "></div>
+                            {%endif%}
+                            <button class="left">&lt;</button>
+                            <button class="right">&gt;</button>
+                        </div>
+                    </div>
+                    <p class="lead">
+                        <strong>Municipio</strong>:{{evento.municipio}}<br>
+                        <strong>Lugar</strong>:{{evento.lugar}}<br>
+                        <strong>Fecha del Evento</strong>:{{evento.fecha |localizeddate('none', 'none', 'es', null, " dd  'de'  MMMM Y  hh:mm aaa")}}<br>
+                        <strong>Descripción</strong>:
+                        {{evento.detalle}}  
+                    </p>
+                </div>
+                <div class="col-md-5 section-comentarios">
+                    <section class="blanco">
+                        {%if app.user!=null%}
+                            {%if comentado%}
+                                <form>Gracias por comentar</form>
+
+                            {%else%}
+                                {{ form_start(comentario) }}
+                                <div class="estrellas">
+                                    <div class="all-estrellas">
+                                        <a class="titulo-estrellas">Calificar</a>
+
+
+                                        {{ form_widget(comentario.estrellas) }}
+                                    </div>
+                                </div>
+
+                                <form class="form-horizontal" role="form">
+                                    <div class="form-group">
+                                        <label>Escribe un comentario</label>
+
+                                        {{ form_widget(comentario.comentario,{ 'attr': {'class': 'form-control', 'placeholder': 'Escribe un texto', 'row': '3' } }) }}
+                                        <button type="submit" class="btn btn-info">Enviar</button>
+                                    </div>
+                                    {{ form_end(comentario) }}
+                                {%endif%}
+                            {%else%}
+                                <form><a class="registrate" href="{{path('fos_user_security_login')}}">Para comentar y calificar, debes iniciar sesión</a></form>
+                            {%endif%}
+                    </section>
+
+                    <div class="todos-comentarios">
+                        <div class="n-comentarios">{{tcomment}} comentarios</div>
+                        {%  for dcomment in datosComentario %}
+                            {%if dcomment.texto%}
+                                <div class="comentario">
+
+                                    <p class="lead"><strong>{{dcomment.User}}:</strong></p>
+                                    <p class="lead">{{dcomment.texto}}</p>
+                                    <p class="lead"><em>{{ dcomment.createdAt |localizeddate('none', 'none', 'es', null, " dd  'de'  MMMM Y ") }}</em></p>
+                                    <p class="lead">{%if dcomment.calificacion==0%}
+                                        Nadie ha calificado
+                                    {%elseif dcomment.calificacion==1%}
+                                        <a  data-value="1" >&#9733;</a>
+                                    {%elseif dcomment.calificacion==2%}
+                                        <a  data-value="1" >&#9733;</a>
+                                        <a  data-value="2" >&#9733;</a>
+                                    {%elseif dcomment.calificacion==3%}
+                                        <a  data-value="1" >&#9733;</a>
+                                        <a  data-value="2" >&#9733;</a>
+                                        <a  data-value="3" >&#9733;</a>
+                                    {%elseif dcomment.calificacion==4%}
+                                        <a  data-value="1" >&#9733;</a>
+                                        <a  data-value="2" >&#9733;</a>
+                                        <a  data-value="3" >&#9733;</a>
+                                        <a  data-value="4" >&#9733;</a>
+                                    {%elseif dcomment.calificacion==5%}
+                                        <a  data-value="1" >&#9733;</a>
+                                        <a  data-value="2" >&#9733;</a>
+                                        <a  data-value="3" >&#9733;</a>
+                                        <a  data-value="4" >&#9733;</a>
+                                        <a  data-value="5" >&#9733;</a>
+                                    {%endif%}
+                                </p>
+                            </div>
+                            {%else%}
+                                <p class="lead">No hay comentarios</p>
+
+                                {%endif%}
+                                    {%endfor%}
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                        {% endblock %}

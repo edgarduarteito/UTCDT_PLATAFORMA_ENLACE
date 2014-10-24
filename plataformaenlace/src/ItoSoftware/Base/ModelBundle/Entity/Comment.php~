@@ -1,0 +1,62 @@
+<?php
+
+namespace ItoSoftware\Base\ModelBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use FOS\CommentBundle\Entity\Comment as BaseComment;
+
+/**
+ * @ORM\Entity
+ * @ORM\ChangeTrackingPolicy("DEFERRED_EXPLICIT")
+ */
+class Comment extends BaseComment
+{
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    /**
+     * Thread of this comment
+     *
+     * @var Thread
+     * @ORM\ManyToOne(targetEntity="WebApp\ModeloBundle\Entity\Thread")
+     */
+    protected $thread;
+
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set thread
+     *
+     * @param \WebApp\ModeloBundle\Entity\Thread $thread
+     * @return Comment
+     */
+    public function setThread(\FOS\CommentBundle\Model\ThreadInterface $thread = null)
+    {
+        $this->thread = $thread;
+
+        return $this;
+    }
+
+    /**
+     * Get thread
+     *
+     * @return \WebApp\ModeloBundle\Entity\Thread 
+     */
+    public function getThread()
+    {
+        return $this->thread;
+    }
+}
